@@ -432,6 +432,47 @@ article .ordinal-num {
 
 // Dropcap CSS - originally from critical CSS
 article[data-use-dropcap="true"] {
-  --font-dropcap-foreground: "EBGaramondInitialsF2", "EBGaramondInitialsF2", serif;
-  --font-dropcap-background: "EBGaramondInitialsF1", "EBGaramondInitialsF1", serif;
+  --dropcap-vertical-offset: 0.15rem;
+  --dropcap-font-size: 3.95rem;
+  --dropcap-min-height: 4.2rem;
+  --before-color: var(--random-dropcap-color, var(--midground-faint));
+  --font-dropcap-foreground: "EBGaramondInitialsF2", serif;
+  --font-dropcap-background: "EBGaramondInitialsF1", serif;
+  position: relative;
+  min-height: 4.2rem;
+}
+
+article[data-use-dropcap="true"] > p:first-of-type {
+  --dropcap-vertical-offset: 0.15rem;
+  --dropcap-font-size: 3.95rem;
+  position: relative;
+  min-height: 4.2rem;
+
+  &::before {
+    content: attr(data-first-letter);
+    text-transform: uppercase;
+    float: left;
+    width: var(--dropcap-font-size);
+    font-size: var(--dropcap-font-size);
+    line-height: 1;
+    padding-right: 0.1em;
+    padding-top: var(--dropcap-vertical-offset);
+    font-family: var(--font-dropcap-background);
+    color: var(--before-color);
+  }
+
+  &::first-letter {
+    margin-left: calc(-1 * var(--dropcap-font-size) - 0.1em);
+    padding-top: var(--dropcap-vertical-offset);
+    text-transform: uppercase;
+    font-style: normal !important;
+    float: left;
+    pointer-events: none;
+    color: var(--foreground);
+    font-size: var(--dropcap-font-size);
+    line-height: 1;
+    padding-right: 0.1em;
+    font-family: var(--font-dropcap-foreground);
+    font-weight: 500 !important;
+  }
 }
