@@ -98,11 +98,13 @@ export function spacesAroundSlashes(text: string): string {
       spaceAfter: string
     }
     const { spaceBefore, markerBefore, markerAfter, spaceAfter } = groups
-    // Add space only if not already present
-    // Place markers outside spaces: marker-space-slash-space-marker
-    const pre = spaceBefore || " "
-    const post = spaceAfter || " "
-    return `${markerBefore || ""}${pre}/${post}${markerAfter || ""}`
+    // Only add space when not already present (preserves existing spacing)
+    const pre = spaceBefore ? "" : " "
+    const post = spaceAfter ? "" : " "
+    // Build: markerBefore + pre + spaceBefore + slash + spaceAfter + post + markerAfter
+    const beforeSlash = spaceBefore || pre
+    const afterSlash = spaceAfter || post
+    return `${markerBefore || ""}${beforeSlash}/${afterSlash}${markerAfter || ""}`
   })
 
   const numberSlashThenNonNumber = /(?<=\d)\/(?=\D)/g
