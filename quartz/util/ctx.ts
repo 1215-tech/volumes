@@ -11,7 +11,7 @@ export interface Argv {
   wsPort: number
   remoteDevHost?: string
   concurrency?: number
-  skipCriticalCSS?: boolean
+  skipCriticalCSS: boolean // Default: true (disabled) for custom content compatibility
   offline?: boolean
   logLevel?: "error" | "warn" | "info" | "debug"
 }

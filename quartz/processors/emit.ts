@@ -35,7 +35,8 @@ export async function emitContent(ctx: BuildCtx, content: ProcessedContent[]) {
   }
 
   const htmlFiles = emittedPaths.filter((fp) => fp.endsWith(".html"))
-  if (htmlFiles.length > 0 && !argv.skipCriticalCSS) {
+  // Disabled critical CSS by default for custom content compatibility
+  if (htmlFiles.length > 0 && argv.skipCriticalCSS === false) {
     log.info("Generating critical CSS")
     await injectCriticalCSSIntoHTMLFiles(htmlFiles, argv.output)
     log.info(`Injected critical CSS into ${htmlFiles.length} files`)
