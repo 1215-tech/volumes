@@ -37,7 +37,7 @@ jobs:
 
       - name: Setup Python Environment
         run: |
-          source $HOME/.local/bin/env
+          export PATH="$HOME/.local/bin:$PATH"
           uv sync
 
       - name: Build Static Site
