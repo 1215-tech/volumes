@@ -36,7 +36,9 @@ jobs:
         run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
       - name: Setup Python Environment
-        run: . $HOME/.local/bin/env && uv sync
+        run: |
+          source $HOME/.local/bin/env
+          uv sync
 
       - name: Build Static Site
         run: pnpm build
