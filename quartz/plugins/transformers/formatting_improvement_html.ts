@@ -108,8 +108,9 @@ export function spacesAroundSlashes(text: string): string {
     return `${markerBefore || ""} / ${markerAfter || ""}`
   })
 
-  const numberSlashThenNonNumber = /(?<=\d)\/(?=\D)/g
-  text = text.replace(numberSlashThenNonNumber, " / ")
+  // DISABLED: This was adding extra spaces to URL paths like /stable/41172493
+  // const numberSlashThenNonNumber = /(?<=\d)\/(?=\D)/g
+  // text = text.replace(numberSlashThenNonNumber, " / ")
 
   // Restore the h/t occurrences
   return text.replace(new RegExp(hatTipPlaceholder, "g"), "h/t")
