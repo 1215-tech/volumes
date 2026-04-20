@@ -40,11 +40,11 @@ import {
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "The Pond",
+    pageTitle: "Volumes",
     enablePopovers: true,
     analytics: null,
 
-    baseUrl: "turntrout.com",
+    baseUrl: "volumesredesign.pages.dev",
     ignorePatterns: ["private", "templates/**", ".obsidian"],
     defaultDateType: "published",
     navbar: {
