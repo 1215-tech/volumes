@@ -699,7 +699,7 @@ export const improveFormatting = (options: Options = {}): Transformer<Root, Root
         const eltsToTransform = collectTransformableElements(node as Element, toSkip)
         eltsToTransform.forEach((elt) => {
           for (const transform of checkedTextTransformers) {
-            transformElement(elt, transform, toSkip, markerChar, false) // Disabled invariance check for custom content
+            transformElement(elt, transform, toSkip, markerChar, true)
           }
 
           for (const transform of activeUncheckedTransformers) {
@@ -712,7 +712,7 @@ export const improveFormatting = (options: Options = {}): Transformer<Root, Root
             return !hasClass(n, "fraction") && n?.tagName !== "a"
           }
           if (slashPredicate(elt)) {
-            transformElement(elt, spacesAroundSlashes, toSkip, markerChar, false) // Disabled invariance check for custom content
+            transformElement(elt, spacesAroundSlashes, toSkip, markerChar, true)
           }
         })
       }
