@@ -10,15 +10,14 @@ tags:
   - clippings
 publish: "true"
 ---
-![](https://www.youtube.com/watch?v=VrBWiFRc4qk)  
 
 And how they might return.
 
 My Twitter: https://twitter.com/metamodernismyt
 My Instagram: https://www.instagram.com/metamodernismyt
-  
-Alfred Twu's Twitter thread on Bungalow Courts: https://x.com/alfred\_twu/status/1197775979596222470  
-"Bungalow Court Housing in Los Angeles, 1900-1930: Top-down Innovation? Or Bottom-up Reform?" by Todd Gish: https://www.jstor.org/stable/41172493  
-Pasadena's Bungalow Court History: https://www.cityofpasadena.net/planning/planning-division/design-and-historic-preservation/historic-preservation/projects-studies/bungalow-courts-in-pasadena/  
-  
+
+Alfred Twu's Twitter thread on Bungalow Courts: https://x.com/alfred_twu/status/1197775979596222470
+"Bungalow Court Housing in Los Angeles, 1900-1930: Top-down Innovation? Or Bottom-up Reform?" by Todd Gish: https://www.jstor.org/stable/41172493
+Pasadena's Bungalow Court History: https://www.cityofpasadena.net/planning/planning-division/design-and-historic-preservation/historic-preservation/projects-studies/bungalow-courts-in-pasadena/
+
 Intro Music by Needs Improvement: https://soundcloud.com/jaskkro
