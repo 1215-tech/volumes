@@ -6398,5 +6398,33 @@
   "/static/images/new_site.avif": {
     "width": 1920,
     "height": 6581
+  },
+  "https://assets.turntrout.com/twemoji/1f446.svg": {
+    "width": 36,
+    "height": 36
+  },
+  "https://assets.turntrout.com/twemoji/1f90d.svg": {
+    "width": 36,
+    "height": 36
+  },
+  "https://assets.turntrout.com/twemoji/23f0.svg": {
+    "width": 36,
+    "height": 36
+  },
+  "https://assets.turntrout.com/twemoji/1f916.svg": {
+    "width": 36,
+    "height": 36
+  },
+  "https://assets.turntrout.com/twemoji/1f3a5.svg": {
+    "width": 36,
+    "height": 36
+  },
+  "https://assets.turntrout.com/twemoji/1f331.svg": {
+    "width": 36,
+    "height": 36
+  },
+  "/static/images/external-favicons/helikon-tex_com.png": {
+    "width": 64,
+    "height": 64
   }
 }
