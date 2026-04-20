@@ -98,11 +98,18 @@ export function spacesAroundSlashes(text: string): string {
       spaceAfter: string
     }
     const { spaceBefore, markerBefore, markerAfter, spaceAfter } = groups
-    // Don't modify if both sides already have proper spacing - preserves invariance
+    // If both sides already have exactly one space each, return unchanged (preserves invariance)
     if (spaceBefore === " " && spaceAfter === " ") {
       return `${markerBefore || ""}/${markerAfter || ""}`
     }
-    // Add space only on side that doesn't have one
+    // If only one side has space, preserve it and add space only to the other side
+    if (spaceBefore === " " && spaceAfter === "") {
+      return `${markerBefore || ""} /${markerAfter || ""}`
+    }
+    if (spaceBefore === "" && spaceAfter === " ") {
+      return `${markerBefore || ""}/ ${markerAfter || ""}`
+    }
+    // Otherwise add one space on each side (handle no spaces or other cases)
     const pre = spaceBefore || " "
     const post = spaceAfter || " "
     return `${markerBefore || ""}${pre}/${post}${markerAfter || ""}`
