@@ -79,6 +79,12 @@ const wbe = `\\b(?!${markerChar}*\\w)`
  * @returns The text with slashes spaced out
  */
 export function spacesAroundSlashes(text: string): string {
+  // Skipslashes in URLs - avoid adding spaces to paths in links like x.com/path/
+  // This preserves the invariance property for content with URLs
+  if (text.includes("://") || text.includes(".com/") || text.includes(".org/") || text.includes(".net/")) {
+    return text
+  }
+
   // First replace h/t with the placeholder character (hatTipPlaceholder imported from constants)
   text = text.replace(/\b(?:h\/t)\b/g, hatTipPlaceholder)
 
