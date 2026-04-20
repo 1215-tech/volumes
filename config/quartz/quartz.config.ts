@@ -93,7 +93,7 @@ const config: QuartzConfig = {
       GitHubFlavoredMarkdown({ enableSmartyPants: false }),
       FixFootnotes(),
       WrapNakedElements(),
-      // HTMLFormattingImprovement(), // Disabled for custom content compatibility
+      HTMLFormattingImprovement(),
       Latex(),
       CrawlLinks({ lazyLoad: true, markdownLinkResolution: "shortest" }),
       rehypeCustomSpoiler(),
