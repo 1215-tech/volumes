@@ -429,3 +429,9 @@ article .ordinal-num {
   // Make it easier to see on light themes
   -webkit-text-stroke: 0.2px light-dark(black, transparent);
 }
+
+// Dropcap CSS - originally from critical CSS
+article[data-use-dropcap="true"] {
+  --font-dropcap-foreground: "EBGaramondInitialsF2", "EBGaramondInitialsF2", serif;
+  --font-dropcap-background: "EBGaramondInitialsF1", "EBGaramondInitialsF1", serif;
+}
