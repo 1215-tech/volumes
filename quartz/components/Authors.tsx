@@ -7,7 +7,7 @@ import { RenderPublicationInfo } from "./ContentMeta"
 
 // skipcq: JS-D1001
 export function formatAuthors(authors: readonly string[]): string {
-  if (authors.length === 0) return "Alex Turner"
+  if (authors.length === 0) return "Iris"
   if (authors.length === 1) return authors[0]
   if (authors.length === 2) return `${authors[0]} and ${authors[1]}`
   return `${authors.slice(0, -1).join(", ")}, and ${authors.at(-1)}`
@@ -18,7 +18,7 @@ const Authors: QuartzComponent = ({ fileData, cfg }: QuartzComponentProps) => {
     return null
   }
 
-  const authorList = fileData.frontmatter?.authors ?? ["Alex Turner"]
+  const authorList = fileData.frontmatter?.authors ?? ["Iris"]
   const authorsText = `By ${formatAuthors(authorList)}`
 
   // Add the publication info
