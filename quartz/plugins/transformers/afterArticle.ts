@@ -9,7 +9,7 @@ import { type QuartzPluginData } from "../vfile"
 import { createSequenceLinksComponent } from "./sequenceLinks"
 import { troutContainerId } from "./trout_hr"
 
-const newsletterElement = h("a", { href: "https://turntrout.substack.com/subscribe" }, [
+const newsletterElement = h("a", { href: "https://github.com/1215-tech" }, [
   "newsletter",
 ])
 
@@ -17,10 +17,10 @@ export const rssElement = h("a", { href: "/rss.xml", id: "rss-link" }, [
   h("abbr", { class: "small-caps" }, "rss"),
 ])
 const subscriptionElement = h("div", { className: "centered" }, [
-  h("div", h("p", ["Find out when I post more content: ", newsletterElement, " & ", rssElement])),
+  h("div", h("p", ["Find me on: ", newsletterElement ])),
 ])
 
-const mailLink = h("a", { href: "mailto:alex@turntrout.com" }, ["alex@turntrout.com"])
+const mailLink = h("a", { href: "mailto:ivan.tulskii@proton.me" }, ["ivan.tulskii@proton.me"])
 
 const pgpLink = h(
   "a",
