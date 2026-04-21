@@ -10,7 +10,7 @@ import { createSequenceLinksComponent } from "./sequenceLinks"
 import { troutContainerId } from "./trout_hr"
 
 const newsletterElement = h("a", { href: "https://github.com/1215-tech" }, [
-  "newsletter",
+  "GitHub",
 ])
 
 export const rssElement = h("a", { href: "/rss.xml", id: "rss-link" }, [
@@ -35,9 +35,6 @@ const contactMe = h("div", [
   h("div", { className: "centered" }, [
     "Thoughts? Email me at ",
     h("code", {}, [mailLink]),
-    " (",
-    pgpLink,
-    ")",
   ]),
 ])
 
