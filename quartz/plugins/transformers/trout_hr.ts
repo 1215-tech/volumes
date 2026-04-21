@@ -13,7 +13,7 @@ import { h } from "hastscript"
 export const ornamentNode: Element = h("div", { id: troutContainerId, role: "separator" }, [
   h("span", { class: "no-select", "aria-hidden": "true" }, ""),
   h("img", {
-    src: "/static/images/D20.png",
+    src: "/static/images/D20.svg",
     alt: "",
     class: "no-select",
     loading: "lazy",
