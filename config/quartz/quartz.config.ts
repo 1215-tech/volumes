@@ -49,7 +49,7 @@ const config: QuartzConfig = {
     defaultDateType: "published",
     navbar: {
       pages: [
-        { title: "About me", slug: "/about" },
+        { title: "Literature", slug: "/Literature" },
         { title: "My research", slug: "/research" },
         { title: "All posts", slug: "/posts" },
         { title: "Open source", slug: "/open-source" },
