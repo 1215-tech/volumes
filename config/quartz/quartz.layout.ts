@@ -3,7 +3,6 @@ import {
   ArticleTitle,
   AuthorList,
   ContentMeta,
-  FolderNav,
   Footer,
   Head,
   Navbar,
@@ -31,5 +30,5 @@ export const defaultContentPageLayout: PageLayout = {
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [ArticleTitle()],
   left: [Navbar()],
-  right: [FolderNav()],
+  right: [TableOfContents(), ContentMeta()],
 }

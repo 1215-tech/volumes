@@ -113,22 +113,3 @@ a.tag-link {
     margin: $base-margin 0;
   }
 }
-
-#folder-nav ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-#folder-nav li {
-  margin-bottom: 0.25rem;
-}
-
-#folder-nav a {
-  color: var(--midground);
-  background-color: transparent;
-}
-
-#folder-nav a:hover {
-  color: var(--foreground);
-}

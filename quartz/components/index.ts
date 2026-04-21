@@ -2,7 +2,6 @@ import ArticleTitle from "./ArticleTitle"
 import AuthorList from "./Authors"
 import { Backlinks } from "./Backlinks"
 import ContentMeta from "./ContentMeta"
-import FolderNav from "./FolderNav"
 import Footer from "./Footer"
 import Head from "./Head"
 import Navbar from "./Navbar"
@@ -17,7 +16,6 @@ export {
   TagContent,
   Head,
   ContentMeta,
-  FolderNav,
   TableOfContents,
   Navbar,
   Backlinks,
