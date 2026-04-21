@@ -1,6 +1,5 @@
 import React from "react"
 import type { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
-import style from "../styles/listPage.scss"
 
 const folders = [
   { name: "11Customs General", slug: "/11Customs-General" },
@@ -30,7 +29,5 @@ const FolderNav: QuartzComponent = (_props: QuartzComponentProps) => {
     </div>
   )
 }
-
-FolderNav.css = style
 
 export default (() => FolderNav) satisfies QuartzComponentConstructor
