@@ -32,8 +32,7 @@ const pgpLink = h(
   [h("abbr", { className: "small-caps" }, "pgp")],
 )
 const contactMe = h("div", [
-  h("div", { className: "centered" }, [
-    "Thoughts? Email me at ",
+  h("div", { className: "centered" }, [,
     h("code", {}, [mailLink]),
   ]),
 ])
