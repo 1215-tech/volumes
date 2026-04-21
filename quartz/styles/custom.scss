@@ -283,8 +283,6 @@ sup {
     width: calc(6 * $base-margin);
     margin-top: calc(2 * $base-margin);
     margin-bottom: calc(2 * $base-margin);
-    filter: light-dark(none, invert(0%)) !important;
-    opacity: 1;
   }
 
   // Right text flourish
