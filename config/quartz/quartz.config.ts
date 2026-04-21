@@ -50,9 +50,12 @@ const config: QuartzConfig = {
     navbar: {
       pages: [
         { title: "Literature", slug: "/Literature" },
-        { title: "My research", slug: "/research" },
-        { title: "All posts", slug: "/posts" },
-        { title: "Open source", slug: "/open-source" },
+        { title: "Homelab, PC and EDC", slug: "/Homelab,-PC-and-EDC" },
+        { title: "Cooking", slug: "/Cooking" },
+        { title: "Health and Biohacking", slug: "/Health-and-biohacking" },
+        { title: "Clothes", slug: "/Clothes"},
+        { title: "House and Appartment", slug:"/House--and--Apartment"},
+        { title: "This Website", slug:"This-Website"},
       ],
     },
   },
