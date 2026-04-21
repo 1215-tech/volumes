@@ -186,16 +186,6 @@ const NavbarComponent: QuartzComponent = ({ cfg, fileData }: QuartzComponentProp
     <nav className="menu" id="nav-menu">
       <ul>
         {orderedLinks}
-        <li>
-          <a
-            href="https://turntrout.substack.com/subscribe"
-            className="external"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Subscribe
-          </a>
-        </li>
       </ul>
       <script dangerouslySetInnerHTML={{ __html: randomPostScript }} />
     </nav>
