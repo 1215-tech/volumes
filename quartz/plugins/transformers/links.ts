@@ -50,7 +50,9 @@ export function isNonRewritableUrl(url: string): boolean {
 
 /** A link is external if it doesn't start with #, ., or / */
 export function isExternalLink(href: string): boolean {
-  return !/^[#./]/.test(href)
+  if (/^[#./]/.test(href)) return false
+  if (/^https?:\/\//.test(href)) return true
+  return false
 }
 
 /** Whether a link points to a resolvable internal page (not external, not non-rewritable) */
