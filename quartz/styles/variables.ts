@@ -23,12 +23,12 @@ export const listPaddingLeft = "1.875rem"
 export const fontScaleFactor = 1.2
 
 // Colors
-export const backgroundDark = "#12141e"
+export const backgroundDark = "#282828"
 export const backgroundLight = "#fcfcff"
-export const foregroundDark = "#d6deff"
+export const foregroundDark = "#ebdbb2"
 export const foregroundLight = "#4c4f69"
-export const midgroundFaintDark = "#737994"
-export const midgroundDark = "#aab3db"
+export const midgroundFaintDark = "#928374"
+export const midgroundDark = "#d5c4a1"
 export const midgroundFaintLight = "#9ca0b0"
 export const midgroundLight = "#74747b"
 export const midgroundStrongLight = "#5c5f77"
@@ -44,18 +44,18 @@ export const liPaddingLeft = `${rawBaseMargin * 0.5}rem`
 
 // Palette colors — single source of truth for _palette.scss (generated) and critical CSS
 export const darkPalette: Readonly<Record<string, string>> = {
-  pink: "#fba7e4",
-  red: "#e88283",
-  maroon: "#d586a1",
-  orange: "#e19b5b",
-  yellow: "#e5c890",
-  green: "#a6d189",
-  teal: "#81c8be",
-  sky: "#5bc4d7",
-  blue: "#8caaee",
-  lavender: "#9899d7",
-  purple: "#ba8be9",
-  gold: "#db9c01",
+  pink: "#d3869b",
+  red: "#fb4934",
+  maroon: "#cc241d",
+  orange: "#fea43a",
+  yellow: "#fabd2f",
+  green: "#b8bb26",
+  teal: "#8ec07c",
+  sky: "#83c0c9",
+  blue: "#458588",
+  lavender: "#d3869b",
+  purple: "#d3869b",
+  gold: "#fabd2f",
 }
 
 export const lightPalette: Readonly<Record<string, string>> = {
