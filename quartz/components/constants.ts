@@ -88,7 +88,7 @@ export const specialFaviconPaths = {
   mail: `${simpleConstants.faviconBasePath}/mail.svg`,
   anchor: `${simpleConstants.faviconBasePath}/anchor.svg`,
   rss: `${simpleConstants.faviconBasePath}/rss.svg`,
-  turntrout: `${simpleConstants.faviconBasePath}/turntrout_com.svg`,
+  turntrout: `/static/favicon.svg`,
   lesswrong: `${simpleConstants.faviconBasePath}/lesswrong_com.svg`,
 } as const
 

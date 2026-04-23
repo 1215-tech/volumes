@@ -149,7 +149,7 @@ export function getQuartzPath(hostname: string): string {
   hostname = hostname === "localhost" ? "turntrout.com" : hostname.replace(/^www\./, "")
   hostname = normalizeHostname(hostname)
   const sanitizedHostname = hostname.replace(/\./g, "_")
-  const path = sanitizedHostname.includes("turntrout_com")
+  const path = sanitizedHostname.includes("volumesredesign_pages_dev")
     ? specialFaviconPaths.turntrout
     : `/${faviconFolder}/${sanitizedHostname}.png`
   logger.debug(`Generated Quartz path: ${path}`)
