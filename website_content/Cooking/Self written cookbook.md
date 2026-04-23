@@ -36,7 +36,7 @@ publish: "true"
 - Allow to marinate for a bit
 
 ### Crashed Radishes 
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients** 
 - Radishes
@@ -53,7 +53,7 @@ publish: "true"
 - Add finely chopped dill, crushed garlic, salt, sugar, vinegar, vegetable oil, and pepper
 - Close the jar tightly and shake well to combine. Refrigerate for at least a couple of hours, preferably overnight
 ### Chicken Cucumber Salad
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 250g of cucumber
@@ -69,7 +69,7 @@ publish: "true"
 - Chicken can be fried or air-fried
 - Just add everything to a bowl and shake/mix
 ### Gravel 
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 2-3 potatoes
@@ -87,7 +87,7 @@ publish: "true"
 - Mix everything in a bowl, ramen can just be crushed up
 
 ### Korean BBQ Shotgun Shells
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - A pack of Manicotti
@@ -121,7 +121,7 @@ publish: "true"
 - Garnish with Spicy Korean Mayo, Green Onions, and Sesame Seeds
 
 ### Drug eggs
-==Online== ==Tested==
+==Online== 
 
 **Ingredients**
 - Eggs
@@ -136,7 +136,7 @@ publish: "true"
 - Let them marinate overnight ~12 hours
 
 ### In-n-Out BBQ Onion Rings 
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - ~500g ground beef
@@ -172,7 +172,7 @@ publish: "true"
 # Soups
 ---
 ### Ezogelin
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 2 table spoon olive oil  
@@ -241,7 +241,7 @@ publish: "true"
 - Now add your sauce to your pasta and there’s your meal
 
 ### Black Garlic Steak and Rice
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 800-900g beef steak (2 pounds)
@@ -287,7 +287,7 @@ publish: "true"
 - Top with the green part of the onion
 
 ### Crispy Beef Tacos
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 450-500g of ground beef (a mix can be used, preferably 80/20)
@@ -329,7 +329,7 @@ publish: "true"
 - Heat a light layer of oil in a pan over medium-low heat. Add the folded tacos and cook until golden and crispy on both sides, adding more oil as needed. Work in batches so they crisp
 - Plate them up, drown them in the garlic lime aioli, add extra cilantro (optional)
 ### Chicken Alfredo (meal-prep edition)
-==Online== ==Not-tested== ==12 meals==
+==Online== ==12 meals==
 
 **Ingredients**
 - ~1400g chicken breast
@@ -365,7 +365,7 @@ publish: "true"
 - Blend the sauce and add it to the thing
 
 ### Chicken Fajitas 
-==Online== ==Not-tested==
+==Online== 
 
 **Chicken marinade**
 - 800g chicken thighs, sliced
@@ -398,7 +398,7 @@ publish: "true"
 - Serve with wraps or tortillas
 
 ### Chicken Gyro
-==Online== ==Not-tested==
+==Online==
 
 **Chicken**
 - 9 boneless and skinless thighs
@@ -449,7 +449,7 @@ publish: "true"
 ### Beef Gyro
 *This one is also simpler*
 
-==Online==  ==Not-tested==
+==Online==
 
 **Ingridients**
 - Ground beef 400g
@@ -479,7 +479,7 @@ publish: "true"
 - Assemble the wraps: Spread tzatziki on a flatbread, add fresh cucumber slices (if using), the meat pieces, sliced red onion, and roasted tomatoes (peel the skins off first). Roll up tightly
 
 ### Chicken Quesadillas
-==Online== ==Not-tested==
+==Online==
 
 **Ingredients**
 - Chicken 
@@ -497,7 +497,7 @@ publish: "true"
 - Put the quesadilla in the pan, then cheese, the chicken, then cheese. Fold it. Should be crisp on both sides
 
 ### Starbucks bacon, sausage and egg wraps
-==Online== ==Not-tested==
+==Online==
 
 **Ingredients**
 - Eggs
@@ -517,7 +517,7 @@ publish: "true"
 - Add everything in the tortilla
 
 ### Beef Arayes
-==High-protein== ==Online== ==Not-tested==
+==High-protein== ==Online== 
 
 **Ingredients**
 - 800g lean ground beef
@@ -536,7 +536,7 @@ publish: "true"
 - Toast in the pan 2-3 minutes each side till the outside is crispy and the meat is cooked through
 
 ### Beef with beans (meal-prep edition)
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 1.5kg of ground beef
@@ -558,7 +558,7 @@ publish: "true"
 - Optionally add nachos on top when serving
 
 ### Chicken pesto bake
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - Rice
@@ -577,7 +577,7 @@ publish: "true"
 # Meat 
 ---
 ### Air-fried chicken hack 
-==Online== ==Not-tested==
+==Online== 
 
 **The table**
 - 500g = 180°C 
@@ -590,7 +590,7 @@ publish: "true"
 Season or marinate your chicken however you want, then place your whole chicken breasts in the air fryer and cook accordingly: 10 minutes → Flip as soon as timer goes off → 10 minutes on same temp → Take out as soon as timer goes off → REST FOR A MINIMUM OF 10 MINUTES
 
 ### Bacon wrapped chicken
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - Some chicken drum sticks 
@@ -609,7 +609,7 @@ Season or marinate your chicken however you want, then place your whole chicken 
 -  Let that sauce tack on until the internal temperature reaches 185 degrees
 
 ### Soldiers Steak and Eggs
-==Online== ==Not-tested==
+==Online==
 
 **Ingredients**
 - Beef steak. Any cut to be honest
@@ -641,7 +641,7 @@ Season or marinate your chicken however you want, then place your whole chicken 
 ---
 
 ### High protein mayo
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - Eggs
@@ -657,7 +657,7 @@ Season or marinate your chicken however you want, then place your whole chicken 
 # Garnishes 
 ---
 ### The Un-fried Fires
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - 4 medium potatoes around 200g
@@ -673,7 +673,7 @@ Season or marinate your chicken however you want, then place your whole chicken 
 - Top with anything and serve
 
 ### Double Baked Potatoes
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - Potatoes
@@ -686,7 +686,7 @@ Season or marinate your chicken however you want, then place your whole chicken 
 - Spoon it back in, top with paprika, and put back in the oven until crust forms
 
 ### Human Kibble 
-==Online== ==Not-tested==
+==Online== 
 
 **Ingredients**
 - Rice around 400g
