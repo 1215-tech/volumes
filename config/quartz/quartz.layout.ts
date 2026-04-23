@@ -4,6 +4,7 @@ import {
   AuthorList,
   ContentMeta,
   Footer,
+  Graph,
   Head,
   Navbar,
   TableOfContents,
@@ -23,7 +24,7 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [ArticleTitle(), AuthorList()],
   left: [Navbar()],
-  right: [TableOfContents(), ContentMeta()],
+  right: [TableOfContents(), ContentMeta(), Graph()],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)

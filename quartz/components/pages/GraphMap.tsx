@@ -1,202 +1,20 @@
 import { PREVIEWABLE_CLASS } from "../constants"
 import type { QuartzComponent, QuartzComponentProps } from "../types"
 import { type FullSlug } from "../../util/path"
-import type { QuartzPluginData } from "../../plugins/vfile"
 import style from "../styles/graphMap.scss"
-
-interface GraphNode {
-  id: string
-  title: string
-  slug: string
-  x: number
-  y: number
-  radius: number
-}
-
-interface GraphLink {
-  source: string
-  target: string
-}
 
 const mapSlug = "map" as FullSlug
 const mapTitle = "Knowledge Graph"
 const mapDescription = "An interactive graph map of all pages on turntrout.com."
 
-function buildGraphData(allFiles: QuartzPluginData[]): { nodes: GraphNode[]; links: GraphLink[] } {
-  const nodes: GraphNode[] = []
-  const nodeMap = new Map<string, number>()
-
-  for (const file of allFiles) {
-    if (!file.slug || !file.frontmatter?.title) continue
-    const slug = file.slug as string
-    const title = file.frontmatter.title as string
-    const displayTitle = typeof title === "string" ? title : ""
-
-    nodeMap.set(slug, nodes.length)
-    nodes.push({
-      id: slug,
-      title: displayTitle,
-      slug: file.slug as string,
-      x: 0,
-      y: 0,
-      radius: Math.min(4 + Math.sqrt(displayTitle.length) * 1.2, 12),
-    })
-  }
-
-  const links: GraphLink[] = []
-  for (const file of allFiles) {
-    if (!file.slug || !file.links) continue
-    const sourceSlug = file.slug as string
-
-    for (const link of file.links) {
-      const targetSlug = link as string
-      if (nodeMap.has(targetSlug) && targetSlug !== sourceSlug) {
-        links.push({ source: sourceSlug, target: targetSlug })
-      }
-    }
-  }
-
-  return { nodes, links }
-}
-
-function simulateForces(
-  nodes: GraphNode[],
-  links: GraphLink[],
-  width: number,
-  height: number,
-  iterations: number,
-): GraphNode[] {
-  const nodeMap = new Map(nodes.map((n) => [n.id, n]))
-
-  // Initialize positions randomly
-  for (const node of nodes) {
-    node.x = Math.random() * width
-    node.y = Math.random() * height
-  }
-
-  for (let i = 0; i < iterations; i++) {
-    // Apply repulsion between all nodes
-    for (const node of nodes) {
-      let fx = 0
-      let fy = 0
-
-      for (const other of nodes) {
-        if (other.id === node.id) continue
-        const dx = node.x - other.x
-        const dy = node.y - other.y
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1
-        const repulsion = (100 * (node.radius + other.radius)) / dist
-        fx += (dx / dist) * repulsion
-        fy += (dy / dist) * repulsion
-      }
-
-      // Center gravity
-      const cx = width / 2
-      const cy = height / 2
-      const toCenterX = cx - node.x
-      const toCenterY = cy - node.y
-      const centerDist = Math.sqrt(toCenterX * toCenterX + toCenterY * toCenterY)
-      if (centerDist > 0) {
-        fx += (toCenterX / centerDist) * 0.5
-        fy += (toCenterY / centerDist) * 0.5
-      }
-
-      const vx = (node.x + fx * 0.1) * 0.85
-      const vy = (node.y + fy * 0.1) * 0.85
-      node.x = Math.max(node.radius, Math.min(width - node.radius, vx))
-      node.y = Math.max(node.radius, Math.min(height - node.radius, vy))
-    }
-
-    // Spring forces along links
-    for (const link of links) {
-      const source = nodeMap.get(link.source)
-      const target = nodeMap.get(link.target)
-      if (!source || !target) continue
-
-      const dx = target.x - source.x
-      const dy = target.y - source.y
-      const dist = Math.sqrt(dx * dx + dy * dy) || 1
-      const idealLength = 80
-      const spring = (dist - idealLength) * 0.05
-
-      if (dist > 0) {
-        const fx = (dx / dist) * spring
-        const fy = (dy / dist) * spring
-        source.x += fx * 0.5
-        source.y += fy * 0.5
-        target.x -= fx * 0.5
-        target.y -= fy * 0.5
-      }
-    }
-  }
-
-  return nodes
-}
-
-export const GraphMap: QuartzComponent = (props: QuartzComponentProps) => {
-  const { fileData, allFiles } = props
-  const { nodes, links } = buildGraphData(allFiles)
-  const processedNodes = simulateForces(nodes, links, 800, 600, 100)
-
-  // Normalize positions to fit in viewBox
-  const minX = Math.min(...processedNodes.map((n) => n.x))
-  const maxX = Math.max(...processedNodes.map((n) => n.x))
-  const minY = Math.min(...processedNodes.map((n) => n.y))
-  const maxY = Math.max(...processedNodes.map((n) => n.y))
-
-  const scale = Math.max(maxX - minX, maxY - minY) || 1
-  const normalizedNodes = processedNodes.map((n) => ({
-    ...n,
-    x: ((n.x - minX) / scale) * 700 + 50,
-    y: ((n.y - minY) / scale) * 500 + 50,
-  }))
-
-  const nodeMap = new Map(normalizedNodes.map((n) => [n.id, n]))
-  const nodeElements = normalizedNodes.map((node) => (
-    <circle
-      key={node.id}
-      cx={node.x}
-      cy={node.y}
-      r={node.radius}
-      fill="var(--primary)"
-      style={{ cursor: "pointer" }}
-      data-title={node.title}
-      data-slug={node.slug}
-    />
-   ))
-
-  const linkElements = links
-    .map((link) => {
-      const source = nodeMap.get(link.source)
-      const target = nodeMap.get(link.target)
-      if (!source || !target) return null
-      return (
-        <line
-          key={`${link.source}-${link.target}`}
-          x1={source.x}
-          y1={source.y}
-          x2={target.x}
-          y2={target.y}
-          stroke="var(--midground-fainter)"
-          strokeWidth={1}
-        />
-      )
-    })
-    .filter(Boolean)
-
-  const cssClasses: readonly string[] = fileData.frontmatter?.cssclasses ?? []
+export const GraphMap: QuartzComponent = (_props: QuartzComponentProps) => {
+  const cssClasses: readonly string[] = _props.fileData.frontmatter?.cssclasses ?? []
   const classes = [PREVIEWABLE_CLASS, ...cssClasses].join(" ")
 
   return (
     <div className={classes}>
       <article data-use-dropcap="false">
-        <div id="graph-map-container">
-          <svg id="graph-svg" width="100%" height="600" viewBox="0 0 800 600">
-            <g id="graph-links">{linkElements}</g>
-            <g id="graph-nodes">{nodeElements}</g>
-          </svg>
-          <div id="graph-tooltip" className="hidden" />
-        </div>
+        <div id="graph-container" data-enable-drag data-enable-zoom />
       </article>
     </div>
   )
@@ -205,32 +23,259 @@ export const GraphMap: QuartzComponent = (props: QuartzComponentProps) => {
 GraphMap.css = style
 
 const graphScript = `
-(function() {
-  var nodes = document.querySelectorAll("#graph-nodes circle");
-  var tooltip = document.getElementById("graph-tooltip");
-  var svg = document.getElementById("graph-svg");
-  
-  for (var i = 0; i < nodes.length; i++) {
-    var circle = nodes[i];
-    var title = circle.getAttribute("data-title");
-    var slug = circle.getAttribute("data-slug");
-    
-    circle.addEventListener("mouseenter", function(e) {
-      tooltip.textContent = title;
-      tooltip.classList.remove("hidden");
-      var rect = svg.getBoundingClientRect();
-      tooltip.style.left = (e.clientX - rect.left + 10) + "px";
-      tooltip.style.top = (e.clientY - rect.top - 10) + "px";
-    });
-    
-    circle.addEventListener("mouseleave", function() {
-      tooltip.classList.add("hidden");
-    });
-    
-    circle.addEventListener("click", function() {
-      window.location.href = slug;
+// Dynamically load d3 from CDN
+(async function() {
+  function loadD3() {
+    return new Promise(function(resolve, reject) {
+      if (window.d3 && window.d3.forceSimulation) {
+        resolve(window.d3);
+        return;
+      }
+      var script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/d3@7";
+      script.onload = function() { resolve(window.d3); };
+      script.onerror = reject;
+      document.head.appendChild(script);
     });
   }
+
+  try {
+    var d3 = await loadD3();
+  } catch (e) {
+    console.error("Failed to load d3:", e);
+    return;
+  }
+
+  var container = document.getElementById("graph-container");
+  if (!container) return;
+  if (!container) return;
+
+  var fullGraph = false;
+  var currentSlug = window.location.pathname.replace(/\\//, "").replace(/\\.html$/, "") || "index";
+  if (!currentSlug) currentSlug = "index";
+
+  var svg, gLinks, gNodes, simulation, nodesData, linksData;
+  var width = 800, height = 600;
+  var scale = 1, translateX = 0, translateY = 0;
+
+  async function fetchData() {
+    try {
+      var res = await fetch("/static/contentIndex.json");
+      var data = await res.json();
+      return data;
+    } catch (e) {
+      console.error("Failed to load graph data:", e);
+      return null;
+    }
+  }
+
+  function simplifySlug(slug) {
+    return slug.replace(/^\\//, "").replace(/\\/index$/, "").replace(/\\.html$/, "");
+  }
+
+  function buildGraphData(indexData, slug, full) {
+    var nodes = [], links = [];
+    var validLinks = new Set(Object.keys(indexData));
+
+    for (var key in indexData) {
+      if (!indexData[key].links) continue;
+      var source = simplifySlug(key);
+      for (var i = 0; i < indexData[key].links.length; i++) {
+        var target = simplifySlug(indexData[key].links[i]);
+        if (validLinks.has(target) || target.startsWith("tags/")) {
+          links.push({ source: source, target: target });
+        }
+      }
+    }
+
+    var neighbourhood = new Set();
+    var queue = [slug];
+    var visited = new Set();
+    visited.add(slug);
+
+    while (queue.length > 0 && !full) {
+      var curr = queue.shift();
+      neighbourhood.add(curr);
+
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        if (link.source === curr && !visited.has(link.target)) {
+          visited.add(link.target);
+          queue.push(link.target);
+        }
+        if (link.target === curr && !visited.has(link.source)) {
+          visited.add(link.source);
+          queue.push(link.source);
+        }
+      }
+    }
+
+    if (full) {
+      for (var key in indexData) {
+        neighbourhood.add(simplifySlug(key));
+      }
+    }
+
+    for (var key in indexData) {
+      var id = simplifySlug(key);
+      if (neighbourhood.has(id)) {
+        nodes.push({
+          id: id,
+          title: indexData[key].title || id,
+          links: indexData[key].links?.length || 0
+        });
+      }
+    }
+
+    var finalLinks = [];
+    for (var i = 0; i < links.length; i++) {
+      if (neighbourhood.has(links[i].source) && neighbourhood.has(links[i].target)) {
+        finalLinks.push(links[i]);
+      }
+    }
+
+    return { nodes: nodes, links: finalLinks };
+  }
+
+  function renderGraph(indexData, slug, full) {
+    container.innerHTML = "";
+
+    var rect = container.getBoundingClientRect();
+    width = rect.width || 800;
+    height = Math.max(rect.height || 600, 400);
+
+    var data = buildGraphData(indexData, slug, full);
+
+    svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "100%");
+    svg.setAttribute("height", "100%");
+    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svg.style.display = "block";
+
+    var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    defs.innerHTML = '<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="var(--midground-fainter)"/></marker>';
+    svg.appendChild(defs);
+
+    var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    gLinks = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    gNodes = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    g.appendChild(gLinks);
+    g.appendChild(gNodes);
+    svg.appendChild(g);
+
+    if (container.dataset.enableZoom !== undefined) {
+      var zoomG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      zoomG.setAttribute("id", "zoom-group");
+      zoomG.appendChild(g);
+      svg.appendChild(zoomG);
+    }
+
+    container.appendChild(svg);
+
+    var nodeMap = new Map();
+    nodesData = data.nodes.map(function(n) {
+      var radius = 3 + Math.sqrt(n.links || 1) * 1.5;
+      var node = {
+        id: n.id,
+        title: n.title,
+        radius: radius,
+        x: Math.random() * width,
+        y: Math.random() * height
+      };
+      nodeMap.set(n.id, node);
+      return node;
+    });
+
+    linksData = data.links.map(function(l) {
+      return {
+        source: nodeMap.get(l.source),
+        target: nodeMap.get(l.target)
+      };
+    }).filter(function(l) { return l.source && l.target; });
+
+    simulation = d3.forceSimulation(nodesData)
+      .force("link", d3.forceLink(linksData).distance(40))
+      .force("charge", d3.forceManyBody().strength(-100))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("collide", d3.forceCollide(function(d) { return d.radius + 2; }));
+
+    function radius(d) { return d.radius; }
+
+    var link = gLinks.selectAll("line")
+      .data(linksData)
+      .enter().append("line")
+      .attr("stroke", "var(--midground-fainter)")
+      .attr("stroke-width", 1)
+      .attr("opacity", 0.6);
+
+    var node = gNodes.selectAll("g")
+      .data(nodesData)
+      .enter().append("g")
+      .attr("cursor", "pointer")
+      .call(d3.drag()
+        .on("start", function(event, d) {
+          if (!event.active) simulation.alphaTarget(1).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        })
+        .on("drag", function(event, d) {
+          d.fx = event.x;
+          d.fy = event.y;
+        })
+        .on("end", function(event, d) {
+          if (!event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        }));
+
+    node.append("circle")
+      .attr("r", radius)
+      .attr("fill", function(d) { return d.id === slug ? "var(--secondary)" : "var(--primary)"; })
+      .attr("stroke", "var(--surface)")
+      .attr("stroke-width", 1.5);
+
+    node.append("title")
+      .text(function(d) { return d.title; });
+
+    node.on("click", function(event, d) {
+      var path = d.id === "index" ? "/" : "/" + d.id + ".html";
+      window.spaNavigate(new URL(path, window.location.toString()));
+    });
+
+    node.on("mouseenter", function(event, d) {
+      d3.select(this).select("circle").attr("fill", "var(--accent)");
+    });
+
+    node.on("mouseleave", function(event, d) {
+      d3.select(this).select("circle").attr("fill", d.id === slug ? "var(--secondary)" : "var(--primary)");
+    });
+
+    simulation.on("tick", function() {
+      link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    });
+  }
+
+  fetchData().then(function(indexData) {
+    if (!indexData) return;
+    renderGraph(indexData, currentSlug, fullGraph);
+
+    if (container.dataset.enableZoom !== undefined) {
+      var zoom = d3.zoom()
+        .scaleExtent([0.25, 4])
+        .on("zoom", function(event) {
+          var g = document.getElementById("zoom-group");
+          if (g) g.setAttribute("transform", event.transform);
+        });
+      d3.select(svg).call(zoom);
+    }
+  });
 })();
 `
 
