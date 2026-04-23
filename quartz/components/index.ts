@@ -3,7 +3,6 @@ import AuthorList from "./Authors"
 import { Backlinks } from "./Backlinks"
 import ContentMeta from "./ContentMeta"
 import Footer from "./Footer"
-import Graph from "./Graph"
 import Head from "./Head"
 import Navbar from "./Navbar"
 import NotFound from "./pages/404"
@@ -23,5 +22,4 @@ export {
   Footer,
   NotFound,
   AuthorList,
-  Graph,
 }

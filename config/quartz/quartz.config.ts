@@ -11,7 +11,6 @@ import {
   FixFootnotes,
   FrontMatter,
   GitHubFlavoredMarkdown,
-  GraphMapPage,
   HTMLFormattingImprovement,
   Latex,
   NotFoundPage,
@@ -50,7 +49,6 @@ const config: QuartzConfig = {
     defaultDateType: "published",
     navbar: {
       pages: [
-        { title: "Map", slug: "/map" },
         { title: "Literature", slug: "/Literature" },
         { title: "Homelab & PC", slug: "/Homelab,-PC-and-EDC" },
         { title: "Cooking", slug: "/Cooking" },
@@ -115,7 +113,6 @@ const config: QuartzConfig = {
       AliasRedirects(),
       ComponentResources(),
       ContentPage(),
-      GraphMapPage(),
       PopulateContainers(),
       TagPage(),
       AllTagsPage(),
