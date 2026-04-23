@@ -6426,5 +6426,9 @@
   "/static/images/external-favicons/helikon-tex_com.png": {
     "width": 64,
     "height": 64
+  },
+  "/static/images/D20.svg": {
+    "width": 192,
+    "height": 192
   }
 }

@@ -10,8 +10,6 @@ interface GraphNode {
   slug: string
   x: number
   y: number
-  vx: number
-  vy: number
   radius: number
 }
 
@@ -39,10 +37,8 @@ function buildGraphData(allFiles: QuartzPluginData[]): { nodes: GraphNode[]; lin
       id: slug,
       title: displayTitle,
       slug: file.slug as string,
-      x: Math.random() * 800,
-      y: Math.random() * 600,
-      vx: 0,
-      vy: 0,
+      x: 0,
+      y: 0,
       radius: Math.min(4 + Math.sqrt(displayTitle.length) * 1.2, 12),
     })
   }
@@ -51,8 +47,6 @@ function buildGraphData(allFiles: QuartzPluginData[]): { nodes: GraphNode[]; lin
   for (const file of allFiles) {
     if (!file.slug || !file.links) continue
     const sourceSlug = file.slug as string
-    const sourceIndex = nodeMap.get(sourceSlug)
-    if (sourceIndex === undefined) continue
 
     for (const link of file.links) {
       const targetSlug = link as string
@@ -74,7 +68,14 @@ function simulateForces(
 ): GraphNode[] {
   const nodeMap = new Map(nodes.map((n) => [n.id, n]))
 
+  // Initialize positions randomly
+  for (const node of nodes) {
+    node.x = Math.random() * width
+    node.y = Math.random() * height
+  }
+
   for (let i = 0; i < iterations; i++) {
+    // Apply repulsion between all nodes
     for (const node of nodes) {
       let fx = 0
       let fy = 0
@@ -89,6 +90,7 @@ function simulateForces(
         fy += (dy / dist) * repulsion
       }
 
+      // Center gravity
       const cx = width / 2
       const cy = height / 2
       const toCenterX = cx - node.x
@@ -99,15 +101,13 @@ function simulateForces(
         fy += (toCenterY / centerDist) * 0.5
       }
 
-      node.vx = (node.vx + fx * 0.1) * 0.85
-      node.vy = (node.vy + fy * 0.1) * 0.85
-      node.x += node.vx
-      node.y += node.vy
-
-      node.x = Math.max(node.radius, Math.min(width - node.radius, node.x))
-      node.y = Math.max(node.radius, Math.min(height - node.radius, node.y))
+      const vx = (node.x + fx * 0.1) * 0.85
+      const vy = (node.y + fy * 0.1) * 0.85
+      node.x = Math.max(node.radius, Math.min(width - node.radius, vx))
+      node.y = Math.max(node.radius, Math.min(height - node.radius, vy))
     }
 
+    // Spring forces along links
     for (const link of links) {
       const source = nodeMap.get(link.source)
       const target = nodeMap.get(link.target)
@@ -122,10 +122,10 @@ function simulateForces(
       if (dist > 0) {
         const fx = (dx / dist) * spring
         const fy = (dy / dist) * spring
-        source.vx += fx * 0.5
-        source.vy += fy * 0.5
-        target.vx -= fx * 0.5
-        target.vy -= fy * 0.5
+        source.x += fx * 0.5
+        source.y += fy * 0.5
+        target.x -= fx * 0.5
+        target.y -= fy * 0.5
       }
     }
   }
@@ -133,10 +133,12 @@ function simulateForces(
   return nodes
 }
 
-function generateGraphJson(allFiles: QuartzPluginData[]): string {
+export const GraphMap: QuartzComponent = (props: QuartzComponentProps) => {
+  const { fileData, allFiles } = props
   const { nodes, links } = buildGraphData(allFiles)
   const processedNodes = simulateForces(nodes, links, 800, 600, 100)
 
+  // Normalize positions to fit in viewBox
   const minX = Math.min(...processedNodes.map((n) => n.x))
   const maxX = Math.max(...processedNodes.map((n) => n.x))
   const minY = Math.min(...processedNodes.map((n) => n.y))
@@ -144,20 +146,43 @@ function generateGraphJson(allFiles: QuartzPluginData[]): string {
 
   const scale = Math.max(maxX - minX, maxY - minY) || 1
   const normalizedNodes = processedNodes.map((n) => ({
-    id: n.id,
-    title: n.title,
-    slug: n.slug,
+    ...n,
     x: ((n.x - minX) / scale) * 700 + 50,
     y: ((n.y - minY) / scale) * 500 + 50,
-    radius: n.radius,
   }))
 
-  return JSON.stringify({ nodes: normalizedNodes, links }, null, 0)
-}
+  const nodeMap = new Map(normalizedNodes.map((n) => [n.id, n]))
+  const nodeElements = normalizedNodes.map((node) => (
+    <circle
+      key={node.id}
+      cx={node.x}
+      cy={node.y}
+      r={node.radius}
+      fill="var(--primary)"
+      style={{ cursor: "pointer" }}
+      data-title={node.title}
+      data-slug={node.slug}
+    />
+   ))
 
-export const GraphMap: QuartzComponent = (props: QuartzComponentProps) => {
-  const { fileData, allFiles } = props
-  const graphJson = generateGraphJson(allFiles)
+  const linkElements = links
+    .map((link) => {
+      const source = nodeMap.get(link.source)
+      const target = nodeMap.get(link.target)
+      if (!source || !target) return null
+      return (
+        <line
+          key={`${link.source}-${link.target}`}
+          x1={source.x}
+          y1={source.y}
+          x2={target.x}
+          y2={target.y}
+          stroke="var(--midground-fainter)"
+          strokeWidth={1}
+        />
+      )
+    })
+    .filter(Boolean)
 
   const cssClasses: readonly string[] = fileData.frontmatter?.cssclasses ?? []
   const classes = [PREVIEWABLE_CLASS, ...cssClasses].join(" ")
@@ -165,22 +190,11 @@ export const GraphMap: QuartzComponent = (props: QuartzComponentProps) => {
   return (
     <div className={classes}>
       <article data-use-dropcap="false">
-        <p>This graph shows {allFiles.length} interconnected pages.</p>
         <div id="graph-map-container">
-          <div
-            id="graph-data"
-            data-graph={graphJson}
-            style={{ display: "none" }}
-          />
           <svg id="graph-svg" width="100%" height="600" viewBox="0 0 800 600">
-            <g id="graph-links" />
-            <g id="graph-nodes" />
+            <g id="graph-links">{linkElements}</g>
+            <g id="graph-nodes">{nodeElements}</g>
           </svg>
-          <div id="graph-controls">
-            <button id="zoom-in" aria-label="Zoom in">+</button>
-            <button id="zoom-out" aria-label="Zoom out">-</button>
-            <button id="reset-view" aria-label="Reset view">Reset</button>
-          </div>
           <div id="graph-tooltip" className="hidden" />
         </div>
       </article>
@@ -189,7 +203,38 @@ export const GraphMap: QuartzComponent = (props: QuartzComponentProps) => {
 }
 
 GraphMap.css = style
-GraphMap.afterDOMLoaded = `const graphData=document.getElementById("graph-data");if(!graphData)return;const data=JSON.parse(graphData.dataset.graph);const svg=document.getElementById("graph-svg");const nodesGroup=document.getElementById("graph-nodes");const linksGroup=document.getElementById("graph-links");const tooltip=document.getElementById("graph-tooltip");let scale=1,translateX=0,translateY=0;const nodeElements=[],linkElements=[];for(const link of data.links){const line=document.createElementNS("http://www.w3.org/2000/svg","line");line.setAttribute("stroke","var(--midground-fainter)");line.setAttribute("stroke-width","1");linksGroup.appendChild(line);linkElements.push(line)}for(const node of data.nodes){const circle=document.createElementNS("http://www.w3.org/2000/svg","circle");circle.setAttribute("cx",node.x);circle.setAttribute("cy",node.y);circle.setAttribute("r",node.radius);circle.setAttribute("fill","var(--primary)");circle.style.cursor="pointer";circle.addEventListener("mouseenter",(e)=>{tooltip.textContent=node.title;tooltip.classList.remove("hidden");const rect=svg.getBoundingClientRect();tooltip.style.left=(e.clientX-rect.left+10)+"px";tooltip.style.top=(e.clientY-rect.top-10)+"px"});circle.addEventListener("mouseleave",()=>tooltip.classList.add("hidden"));circle.addEventListener("click",()=>window.location.href=node.slug);nodesGroup.appendChild(circle);nodeElements.push(circle)}function render(){const t="translate("+translateX+","+translateY+") scale("+scale+")";nodesGroup.setAttribute("transform",t);linksGroup.setAttribute("transform",t);for(let i=0;i<data.nodes.length;i++){const node=data.nodes[i];const link=data.links[i];if(linkElements[i]){const source=data.nodes.find(n=>n.id===link.source);const target=data.nodes.find(n=>n.id===link.target);if(source&&target){linkElements[i].setAttribute("x1",source.x);linkElements[i].setAttribute("y1",source.y);linkElements[i].setAttribute("x2",target.x);linkElements[i].setAttribute("y2",target.y)}}}}render();document.getElementById("zoom-in")?.addEventListener("click",()=>{scale*=1.2;render()});document.getElementById("zoom-out")?.addEventListener("click",()=>{scale/=1.2;render()});document.getElementById("reset-view")?.addEventListener("click",()=>{scale=1;translateX=0;translateY=0;render()});let isDragging=false,startX,startY;svg.addEventListener("mousedown",(e)=>{isDragging=true;startX=e.clientX-translateX;startY=e.clientY-translateY});svg.addEventListener("mousemove",(e)=>{if(!isDragging)return;translateX=e.clientX-startX;translateY=e.clientY-startY;render()});svg.addEventListener("mouseup",()=>isDragging=false);svg.addEventListener("mouseleave",()=>isDragging=false)`
+
+const graphScript = `
+(function() {
+  var nodes = document.querySelectorAll("#graph-nodes circle");
+  var tooltip = document.getElementById("graph-tooltip");
+  var svg = document.getElementById("graph-svg");
+  
+  for (var i = 0; i < nodes.length; i++) {
+    var circle = nodes[i];
+    var title = circle.getAttribute("data-title");
+    var slug = circle.getAttribute("data-slug");
+    
+    circle.addEventListener("mouseenter", function(e) {
+      tooltip.textContent = title;
+      tooltip.classList.remove("hidden");
+      var rect = svg.getBoundingClientRect();
+      tooltip.style.left = (e.clientX - rect.left + 10) + "px";
+      tooltip.style.top = (e.clientY - rect.top - 10) + "px";
+    });
+    
+    circle.addEventListener("mouseleave", function() {
+      tooltip.classList.add("hidden");
+    });
+    
+    circle.addEventListener("click", function() {
+      window.location.href = slug;
+    });
+  }
+})();
+`
+
+GraphMap.afterDOMLoaded = graphScript
 
 export { mapSlug, mapTitle, mapDescription }
 export default GraphMap
