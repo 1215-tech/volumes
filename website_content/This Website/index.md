@@ -51,3 +51,4 @@ The site uses a dark Gruvbox color scheme for the dark theme. The light theme is
 - Implement the light theme
 - Change the meta stuff (the pasting link images and title)
 - Implement the eye with tracking
+- Change the 404 page
