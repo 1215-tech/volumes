@@ -18,8 +18,6 @@ isbn10: 1459610385
 publish: "true"
 ---
 ---
-*Recommended by Mr. Balls, for which I am grateful.*
-
 The systems main goal is conformity by any means, be that docile, domesticated, de-radicalized  or outright lobotomized population. In recent centuries, due to the industrial progress of the society, the system has become more and more liberal. This happened specifically due to the systems one and only goal - maintain order. We got feminism because the economy needed new workers and home-keeping being culturally and factually reduced in it's value and meaningfulness. We got LGBT for relatively same reasons. We also got the anti-men sentiment in the media today, which didn't exist that much at the time of this book, specifically due to the fact that men, naturally, are more aggressive, assertive, militant and by an extension more prone to being revolutionaries. 
 
 In other words the only thing that the system is, is order. No more, no less. The system is not left, it's not right, it's not liberal or conservative, it's just obedience. There is no greater evil behind the system either. The ZOG, the jews, the Blackrocks of the world are the same cogs in the machine, just bigger ones. Although, I will remark that the idea of ZOG does conveniently simplify the whole thing, thus shall be used. 
