@@ -3,7 +3,7 @@ title: Welcome
 created: 2025-02-25
 publish: "true"
 ---
-*My thoughts, ideas, opinions and other, slightly esoteric stuff all in one place*
+My thoughts, ideas, opinions and other, slightly esoteric stuff all in one place. 
 
 - [[Homelab, PC and EDC/index |Homelab, PC and EDC]]
 - [[Health and biohacking/index |Health & Biohacking]]
