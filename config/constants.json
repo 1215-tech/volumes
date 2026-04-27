@@ -8,7 +8,7 @@
   "localTroutFaviconBasenameDefault": "favicon",
   "faviconMimeType": "image/x-icon",
   "appleTouchIconUrl": "/static/images/D20.png",
-  "faviconBasePath": "/static/images/D20.svg",
+  "faviconBasePath": "/static/images/external-favicons",
   "minFaviconCount": 6,
   "googleSubdomainWhitelist": ["scholar", "play", "docs", "drive", "mail", "colab.research"],
   "faviconCountWhitelist": [
