@@ -24,18 +24,18 @@ export const fontScaleFactor = 1.2
 
 // Colors
 export const backgroundDark = "#282828"
-export const backgroundLight = "#fcfcff"
+export const backgroundLight = "#fbf1c7"
 export const foregroundDark = "#ebdbb2"
-export const foregroundLight = "#4c4f69"
+export const foregroundLight = "#3c3836"
 export const midgroundFaintDark = "#928374"
 export const midgroundDark = "#d5c4a1"
-export const midgroundFaintLight = "#9ca0b0"
-export const midgroundLight = "#74747b"
-export const midgroundStrongLight = "#5c5f77"
+export const midgroundFaintLight = "#a89984"
+export const midgroundLight = "#bdae93"
+export const midgroundStrongLight = "#928374"
 export const midgroundStrongDark = "#c6cff0"
-export const secondaryLight = "#1e66f5"
+export const secondaryLight = "#458588"
 export const secondaryDark = "#d3869b"
-export const tertiaryLight = "#0486b9"
+export const tertiaryLight = "#d65d0e"
 export const tertiaryDark = "#99d1db"
 export const highlightLight = "#7c7f9324"
 export const highlightDark = "#949cbb30"
@@ -59,17 +59,17 @@ export const darkPalette: Readonly<Record<string, string>> = {
 }
 
 export const lightPalette: Readonly<Record<string, string>> = {
-  pink: "#d020a3",
-  red: "#be415c",
-  orange: "#a45c19",
-  yellow: "#7d751c",
-  green: "#22820d",
-  teal: "#037e85",
-  sky: "#007cb4",
-  blue: "#3e6ccb",
-  lavender: "#4963fd",
-  purple: "#6f42c1",
-  gold: "#9b6700",
+  pink: "#b16286",
+  red: "#cc241d",
+  orange: "#d65d0e",
+  yellow: "#d79921",
+  green: "#98971a",
+  teal: "#689d6a",
+  sky: "#458588",
+  blue: "#458588",
+  lavender: "#b16286",
+  purple: "#b16286",
+  gold: "#d79921",
 }
 
 export const dropcapVerticalOffset = "0.15rem"
