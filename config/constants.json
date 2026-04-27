@@ -7,8 +7,8 @@
   "localTroutFaviconExtensionDefault": "ico",
   "localTroutFaviconBasenameDefault": "favicon",
   "faviconMimeType": "image/x-icon",
-  "appleTouchIconUrl": "/static/images/D20.png",
-  "faviconBasePath": "/static/images/external-favicons",
+  "appleTouchIconUrl": "https://assets.turntrout.com/static/images/apple-icon.png",
+  "faviconBasePath": "https://assets.turntrout.com/static/images/external-favicons",
   "minFaviconCount": 6,
   "googleSubdomainWhitelist": ["scholar", "play", "docs", "drive", "mail", "colab.research"],
   "faviconCountWhitelist": [
