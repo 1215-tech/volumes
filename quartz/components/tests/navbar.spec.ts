@@ -1,6 +1,6 @@
-import type { Locator, Page } from "@playwright/test"
+import type { Page } from "@playwright/test"
 
-import { simpleConstants, urlBarScrollTolerance } from "../constants"
+import { urlBarScrollTolerance } from "../constants"
 import { type Theme } from "../scripts/darkmode"
 import { test, expect } from "./fixtures"
 import {
@@ -12,116 +12,6 @@ import {
   triggerAndWaitForSPANav,
   moveMouseToSafePosition,
 } from "./visual_utils"
-
-const { pondVideoId } = simpleConstants
-
-interface VideoElements {
-  video: Locator
-  autoplayToggle: Locator
-  playIcon: Locator
-  pauseIcon: Locator
-}
-
-function getVideoElements(page: Page): VideoElements {
-  return {
-    video: page.locator(`video#${pondVideoId}`),
-    autoplayToggle: page.locator("#video-toggle"),
-    playIcon: page.locator("#play-icon"),
-    pauseIcon: page.locator("#pause-icon"),
-  }
-}
-
-function getCurrentTime(video: Locator): Promise<number> {
-  return video.evaluate((videoElement: HTMLVideoElement) => videoElement.currentTime)
-}
-
-function isPaused(video: Locator): Promise<boolean> {
-  return video.evaluate((videoElement: HTMLVideoElement) => videoElement.paused)
-}
-
-async function ensureVideoPlaying(videoElements: VideoElements): Promise<void> {
-  const { video } = videoElements
-
-  // Wait for enough data to play through to the end (HAVE_ENOUGH_DATA = 4).
-  // readyState >= 3 (canplay) is insufficient for seeking: Safari may only
-  // have a few hundred ms buffered at that point.  canplaythrough guarantees
-  // the browser has enough data to seek to any position without stalling.
-  await video.evaluate((videoElement: HTMLVideoElement) => {
-    if (videoElement.readyState < 4) {
-      return new Promise<void>((resolve) => {
-        videoElement.addEventListener("canplaythrough", () => resolve(), { once: true })
-      })
-    }
-    return undefined
-  })
-
-  // Check if video is already playing
-  const isCurrentlyPaused = await isPaused(video)
-
-  // If video is paused, click toggle to enable autoplay
-  if (isCurrentlyPaused) {
-    await videoElements.autoplayToggle.click()
-    // Wait for video to actually be playing (not just !paused, but actively playing)
-    await video.page().waitForFunction((id: string) => {
-      const videoElement = document.querySelector<HTMLVideoElement>(`#${id}`)
-      return (
-        videoElement &&
-        !videoElement.paused &&
-        videoElement.readyState >= 3 &&
-        videoElement.currentTime > 0
-      )
-    }, pondVideoId)
-  }
-}
-
-const fixedTimestamp = 2.5
-/**
- * Prepares a video at a known timestamp for tests that verify timestamp preservation.
- * Ensures the video is playing and sets it to a fixed timestamp, pauses it, then validates the
- * timestamp was set correctly within tolerance.
- *
- * @param videoElements - The video element locators
- * @returns The actual timestamp after setting (for comparison in tests)
- */
-async function setupVideoForTimestampTest(videoElements: VideoElements): Promise<number> {
-  await ensureVideoPlaying(videoElements)
-
-  const { video, autoplayToggle } = videoElements
-
-  // Set currentTime and wait for seeked event (which fires when seeking completes)
-  await video.evaluate((videoElement: HTMLVideoElement, timestamp: number) => {
-    return new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        reject(new Error(`Seek to ${timestamp} timed out`))
-      }, 5000)
-
-      videoElement.addEventListener(
-        "seeked",
-        () => {
-          clearTimeout(timeout)
-          videoElement.pause()
-          // Trigger timeupdate to ensure sessionStorage is saved
-          videoElement.dispatchEvent(new Event("timeupdate"))
-          resolve()
-        },
-        { once: true },
-      )
-
-      videoElement.currentTime = timestamp
-    })
-  }, fixedTimestamp)
-
-  await autoplayToggle.click()
-  await expect(isPaused(video)).resolves.toBe(true)
-
-  const timestamp = await getCurrentTime(video)
-  // We verify PRESERVATION of the timestamp, not that the seek reached exactly
-  // fixedTimestamp. Safari CI buffers minimally so the seek may land early;
-  // any non-zero position confirms the seek was applied.
-  expect(timestamp).toBeGreaterThan(0)
-
-  return timestamp
-}
 
 test.beforeEach(async ({ page }) => {
   await gotoPage(page, "http://localhost:8080/test-page", "domcontentloaded")
@@ -424,158 +314,25 @@ test("Random post link navigates to a different page on mobile", async ({ page }
   await expect(page).not.toHaveURL(initialUrl)
 })
 
-test("Video toggle button is visible and functional", async ({ page }) => {
+test("Theme toggle is visible and functional", async ({ page }) => {
   test.skip(!isDesktopViewport(page), "Desktop-only test")
 
-  const { autoplayToggle, playIcon, pauseIcon } = getVideoElements(page)
+  const dayIcon = page.locator("#day-icon")
+  const nightIcon = page.locator("#night-icon")
+  const themeToggle = page.locator("#theme-toggle")
 
-  await expect(autoplayToggle).toBeVisible()
-  await expect(playIcon).toBeVisible()
-  await expect(pauseIcon).toBeHidden()
-  await expect(autoplayToggle).toHaveAttribute("aria-label", "Enable video autoplay")
+  await expect(themeToggle).toBeVisible()
+  // Initially should show day icon (light mode)
+  await expect(dayIcon).toBeVisible()
+  await expect(nightIcon).toBeHidden()
 })
 
-test("Video toggle changes autoplay behavior", async ({ page }) => {
+test("SPA navigation works correctly", async ({ page }) => {
   test.skip(!isDesktopViewport(page), "Desktop-only test")
-
-  const { video, autoplayToggle, playIcon, pauseIcon } = getVideoElements(page)
-
-  await expect(video).toBeVisible()
-  await expect(playIcon).toBeVisible()
-  await expect(pauseIcon).toBeHidden()
-
-  await autoplayToggle.click()
-
-  // Video should play and icons should switch
-  await page.waitForFunction((id) => {
-    const videoElement = document.querySelector<HTMLVideoElement>(`#${id}`)
-    return videoElement && !videoElement.paused && videoElement.readyState >= 3
-  }, pondVideoId)
-  await expect(pauseIcon).toBeVisible()
-  await expect(playIcon).toBeHidden()
-  await expect(autoplayToggle).toHaveAttribute("aria-label", "Disable video autoplay")
-
-  await autoplayToggle.click()
-
-  await page.waitForFunction(
-    (id) => document.querySelector<HTMLVideoElement>(`#${id}`)?.paused,
-    pondVideoId,
-  )
-  await expect(playIcon).toBeVisible()
-  await expect(pauseIcon).toBeHidden()
-  await expect(autoplayToggle).toHaveAttribute("aria-label", "Enable video autoplay")
-})
-
-test("Video autoplay preference persists across page reloads", async ({ page }) => {
-  test.skip(!isDesktopViewport(page), "Desktop-only test")
-
-  const { video, autoplayToggle, playIcon, pauseIcon } = getVideoElements(page)
-
-  await autoplayToggle.click()
-  await expect(pauseIcon).toBeVisible()
-  await expect(playIcon).toBeHidden()
-
-  await reloadPage(page)
-
-  await expect(pauseIcon).toBeVisible()
-  await expect(playIcon).toBeHidden()
-  await expect(autoplayToggle).toHaveAttribute("aria-label", "Disable video autoplay")
-
-  // Wait for video to have enough data loaded, then verify it starts playing.
-  // Safari can report readyState=4 and paused=false before currentTime advances,
-  // so use timeupdate (which fires on every frame) without { once: true }.
-  await video.evaluate((videoElement: HTMLVideoElement) => {
-    return new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        reject(
-          new Error(
-            `Video failed to reach playable state: readyState=${videoElement.readyState}, paused=${videoElement.paused}, currentTime=${videoElement.currentTime}`,
-          ),
-        )
-      }, 15_000)
-
-      const checkPlayable = () => {
-        if (videoElement.readyState >= 3 && !videoElement.paused && videoElement.currentTime > 0) {
-          clearTimeout(timeout)
-          videoElement.removeEventListener("timeupdate", checkPlayable)
-          resolve()
-        }
-      }
-
-      if (videoElement.readyState >= 3 && !videoElement.paused && videoElement.currentTime > 0) {
-        clearTimeout(timeout)
-        resolve()
-      } else {
-        // Use timeupdate without once — it fires each frame, giving us
-        // repeated chances to check currentTime after it advances.
-        videoElement.addEventListener("timeupdate", checkPlayable)
-        videoElement.addEventListener("canplay", checkPlayable, { once: true })
-        videoElement.addEventListener("playing", checkPlayable, { once: true })
-      }
-    })
-  })
-  await expect(isPaused(video)).resolves.toBe(false)
-})
-
-test("Video autoplay works correctly after SPA navigation", async ({ page }) => {
-  test.skip(!isDesktopViewport(page), "Desktop-only test")
-
-  const { video, autoplayToggle } = getVideoElements(page)
-
-  await autoplayToggle.click()
-  await page.waitForFunction((id) => {
-    const videoElement = document.querySelector<HTMLVideoElement>(`#${id}`)
-    return videoElement && !videoElement.paused && videoElement.readyState >= 3
-  }, pondVideoId)
-
-  await page.evaluate(() => window.spaNavigate(new URL("/design", window.location.origin)))
-  await expect(page).toHaveURL(/\/design/)
-
-  // Setting should persist and video should still be playing
-  await expect(isPaused(video)).resolves.toBe(false)
-
-  await autoplayToggle.click()
-  await page.waitForFunction(
-    (id) => document.querySelector<HTMLVideoElement>(`#${id}`)?.paused,
-    pondVideoId,
-  )
-})
-
-async function getTimestampAfterNavigation(page: Page): Promise<number> {
-  const handle = await page.waitForFunction(
-    (id) => {
-      const videoEl = document.querySelector<HTMLVideoElement>(`#${id}`)
-      return videoEl && videoEl.currentTime > 0 ? videoEl.currentTime : null
-    },
-    pondVideoId,
-    { timeout: 45_000 },
-  )
-  return (await handle.jsonValue()) as number
-}
-
-test("Video timestamp is preserved during SPA navigation", async ({ page }) => {
-  test.skip(!isDesktopViewport(page), "Desktop-only test")
-
-  const videoElements = getVideoElements(page)
-  const timestampBeforeNavigation = await setupVideoForTimestampTest(videoElements)
 
   const localLink = page.locator("a:not(.skip-to-content)").first()
+  const initialUrl = page.url()
   await triggerAndWaitForSPANav(page, () => localLink.click())
 
-  const timestampAfterNavigation = await getTimestampAfterNavigation(page)
-  expect(timestampAfterNavigation).toBeCloseTo(timestampBeforeNavigation, 0)
-})
-
-test("Video timestamp is preserved during refresh", async ({ page }) => {
-  test.skip(!isDesktopViewport(page), "Desktop-only test")
-  // reloadPage + video timestamp restoration can exceed the default 30s in Firefox
-  test.setTimeout(60_000)
-
-  const videoElements = getVideoElements(page)
-  const timestampBeforeRefresh = await setupVideoForTimestampTest(videoElements)
-
-  await reloadPage(page)
-
-  const timestampAfterRefresh = await getTimestampAfterNavigation(page)
-  expect(timestampAfterRefresh).toBeCloseTo(timestampBeforeRefresh, 0)
+  await expect(page).not.toHaveURL(initialUrl)
 })

@@ -4,7 +4,7 @@
 import React from "react"
 
 import { type FullSlug, pathToRoot, resolveRelative } from "../util/path"
-import { defaultTitle, pondVideoId } from "./constants"
+import { defaultTitle } from "./constants"
 // @ts-expect-error Not a module but a script
 // skipcq: JS-W1028
 import script from "./scripts/navbar.inline"
@@ -48,39 +48,6 @@ const darkSvg = (
   </svg>
 )
 
-const playIcon = (
-  <svg
-    id="play-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M8 5v14l11-7z" />
-  </svg>
-)
-
-const pauseIcon = (
-  <svg
-    id="pause-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-  </svg>
-)
-
-const videoToggle = (
-  <span id="video-toggle-span" className="no-select">
-    <button id="video-toggle" type="button" aria-label="Disable video autoplay">
-      {playIcon}
-      {pauseIcon}
-    </button>
-  </span>
-)
-
 const darkMode = (
   <span id="darkmode-span" className="no-select">
     <p id="theme-label" />
@@ -118,23 +85,8 @@ type Page = {
   title: string
 }
 
-const headerVideoSpan = (
-  <span id="header-video-container" className="video-container" data-persist-video="true">
-    <video
-      id={pondVideoId}
-      className="no-select no-vsc"
-      loop
-      muted
-      playsInline
-      data-persist
-      preload="auto"
-      poster="/static/pond_frame.avif"
-      aria-hidden="true"
-    >
-      <source src="/static/pond.mov" type="video/mp4; codecs=hvc1" />
-      <source src="/static/pond.webm" type="video/webm" />
-    </video>
-  </span>
+const headerImage = (
+  <img src="/static/images/eye.png" alt="Logo" id="header-image" className="no-select no-vsc" />
 )
 
 /**
@@ -193,13 +145,12 @@ const NavbarComponent: QuartzComponent = ({ cfg, fileData }: QuartzComponentProp
   return (
     <div id="navbar" className="navbar">
       <div id="navbar-left">
-        {headerVideoSpan}
+        {headerImage}
         <h2>
           <a href={baseDir} className="internal">
             {title}
           </a>
         </h2>
-        {videoToggle}
         {darkMode}
       </div>
       <div id="navbar-right">

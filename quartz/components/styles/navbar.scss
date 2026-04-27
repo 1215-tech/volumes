@@ -224,8 +224,8 @@
   }
 }
 
-#pond-video {
-  // Consistent width and spacing for both img and video
+#header-image {
+  // Consistent width and spacing for header image
   width: 100%;
   max-width: 100%;
   margin-bottom: 0;
@@ -233,13 +233,13 @@
   object-fit: contain;
 }
 
-$header-video-size: 188px;
+$header-image-size: 188px;
 
-#header-video-container {
+#header-image-container {
   @media all and (min-width: $min-desktop-width) {
-    width: $header-video-size;
-    height: $header-video-size;
-    min-height: $header-video-size;
+    width: $header-image-size;
+    height: $header-image-size;
+    min-height: $header-image-size;
     aspect-ratio: 1;
     display: block;
   }
@@ -247,40 +247,6 @@ $header-video-size: 188px;
   // Hide on mobile
   @media all and (max-width: $max-mobile-width) {
     display: none;
-  }
-}
-
-#video-toggle-span {
-  --video-toggle-icon-size: 15px;
-
-  position: absolute;
-  top: 2%;
-  left: 5%;
-
-  @media all and (max-width: $max-mobile-width) {
-    display: none;
-  }
-
-  & #video-toggle {
-    width: var(--video-toggle-icon-size);
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    padding: 0;
-
-    & svg {
-      width: inherit;
-      margin: 0;
-      color: var(--midground);
-    }
-
-    & #play-icon {
-      display: var(--video-play-display, block);
-    }
-
-    & #pause-icon {
-      display: var(--video-pause-display, none);
-    }
   }
 }
 

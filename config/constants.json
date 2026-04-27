@@ -61,8 +61,6 @@
     "playwright_dev",
     "mozilla_org"
   ],
-  "sessionStoragePondVideoKey": "pond-video-timestamp",
-  "pondVideoId": "pond-video",
   "debounceSearchDelay": 400,
   "mouseFocusDelay": 100,
   "searchPlaceholderDesktop": "Toggle search by pressing /",
@@ -101,7 +99,6 @@
   "maxCardImageSizeKb": 300,
   "playwrightConfigs": 9,
   "savedThemeKey": "saved-theme",
-  "autoplayStorageKey": "pond-video-autoplay",
   "instantScrollRestoreKey": "instantScrollRestore",
   "scrollPositionKeyPrefix": "scroll:",
   "scrollPositionMinThreshold": 150,

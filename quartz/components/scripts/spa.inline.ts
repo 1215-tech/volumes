@@ -12,7 +12,6 @@ import {
   instantScrollRestoreKey,
   scrollPositionKeyPrefix,
   scrollPositionMinThreshold,
-  sessionStoragePondVideoKey,
   SEARCH_MATCH_CLASS,
 } from "../constants"
 import { debounce } from "./component_script_utils"
@@ -20,7 +19,7 @@ import { isPrinting } from "./printState"
 import { matchHTML } from "./search"
 import { isLocalUrl } from "./spa_utils"
 
-const { pondVideoId, spaFetchTimeoutMs } = simpleConstants
+const { spaFetchTimeoutMs } = simpleConstants
 
 // SPA accessibility announcement for screen readers
 const announcer = document.createElement("route-announcer")
@@ -209,25 +208,6 @@ async function updatePage(html: Document, url: URL): Promise<void> {
   // Append announcer to the *new* body before morph
   // micromorph will merge it into the existing DOM structure
   html.body.appendChild(announcer)
-
-  // Clean up non-video siblings in both old and new containers so micromorph
-  // compares them positionally as [video] vs [video] → MODIFY (preserves the
-  // existing loaded element).  Without this, whitespace text nodes or
-  // extension-injected elements cause a position mismatch that REPLACEs the
-  // video, losing its readyState/currentTime.
-  const videoElement = document.getElementById(pondVideoId)
-  if (videoElement?.parentElement) {
-    const containerId = videoElement.parentElement.id
-    for (const root of [document, html]) {
-      const container = root.getElementById(containerId)
-      const video = container?.querySelector(`#${pondVideoId}`)
-      if (container && video) {
-        Array.from(container.childNodes).forEach((node) => {
-          if (node !== video) container.removeChild(node)
-        })
-      }
-    }
-  }
 
   console.debug(`[updatePage] Starting DOM update for ${url.pathname}`)
   try {
@@ -526,14 +506,6 @@ let lastKnownPathname = window.location.pathname
  */
 async function navigate(url: URL, opts?: { scroll?: boolean; fetch?: boolean }): Promise<void> {
   removePopovers()
-
-  // Save video timestamp before DOM morph so it survives navigation.
-  // The timeupdate listener in navbar.inline.ts saves periodically, but if the
-  // video is paused the last saved value may be stale.
-  const videoElement = document.getElementById(pondVideoId) as HTMLVideoElement | null
-  if (videoElement) {
-    sessionStorage.setItem(sessionStoragePondVideoKey, videoElement.currentTime.toString())
-  }
 
   // 1. Persist the current scroll position in the *existing* history entry so that
   // navigating back restores the correct position (e.g., top-of-page before an

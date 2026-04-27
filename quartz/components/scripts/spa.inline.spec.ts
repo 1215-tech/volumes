@@ -25,8 +25,6 @@ import {
   triggerAndWaitForSPANav,
 } from "../tests/visual_utils"
 
-const { pondVideoId } = simpleConstants
-
 const testingPageSlug = testPageSlug
 
 /*
@@ -648,39 +646,6 @@ test.describe("Same-page navigation", () => {
 
     const finalScroll = await page.evaluate(() => window.scrollY)
     expect(finalScroll).toBeCloseTo(scrollTarget, -1)
-  })
-})
-
-test.describe("SPA Navigation DOM Cleanup", () => {
-  test("removes unexpected siblings of video element before morphing", async ({ page }) => {
-    test.skip(!isDesktopViewport(page), "Video element is not visible on mobile")
-    // Inject the video element structure and a rogue sibling for testing
-    await page.evaluate(() => {
-      const navbarLeft = document.getElementById("navbar-left")
-      if (navbarLeft) {
-        const videoContainer = document.createElement("span")
-        videoContainer.id = "header-video-container"
-
-        const rogueDiv = document.createElement("div")
-        rogueDiv.id = "rogue-sibling"
-        rogueDiv.textContent = "Injected by extension"
-
-        const actualVideoParent = document.createElement("div")
-        actualVideoParent.appendChild(rogueDiv) // Inject sibling
-
-        videoContainer.appendChild(actualVideoParent)
-        navbarLeft.prepend(videoContainer)
-      }
-    }, pondVideoId)
-
-    await expect(page.locator(`#${pondVideoId}`)).toBeVisible()
-    await expect(page.locator("#rogue-sibling")).toBeVisible()
-
-    await page.evaluate(() => window.spaNavigate(new URL("/design", window.location.origin)))
-    await page.waitForURL("**/design")
-
-    await expect(page.locator("#rogue-sibling")).toBeHidden()
-    await expect(page.locator(`#${pondVideoId}`)).toBeVisible()
   })
 })
 
