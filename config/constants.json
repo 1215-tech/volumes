@@ -1,5 +1,5 @@
 {
-  "defaultCardUrl": "https://assets.turntrout.com/static/images/fb_preview.png",
+  "defaultCardUrl": "/static/images/eye.png",
   "defaultCardAlt": "Purveyor of curiosities.",
   "defaultTitle": "Volumes",
   "defaultDescription": "Personal almanac.",
@@ -7,8 +7,8 @@
   "localTroutFaviconExtensionDefault": "ico",
   "localTroutFaviconBasenameDefault": "favicon",
   "faviconMimeType": "image/x-icon",
-  "appleTouchIconUrl": "https://assets.turntrout.com/static/images/apple-icon.png",
-  "faviconBasePath": "https://assets.turntrout.com/static/images/external-favicons",
+  "appleTouchIconUrl": "/static/images/D20.png",
+  "faviconBasePath": "/static/images/D20.svg",
   "minFaviconCount": 6,
   "googleSubdomainWhitelist": ["scholar", "play", "docs", "drive", "mail", "colab.research"],
   "faviconCountWhitelist": [
