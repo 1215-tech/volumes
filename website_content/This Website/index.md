@@ -35,7 +35,7 @@ I like to "marinate" some of my notes, hence this change.
 
 ## Visual changes
 
-The site uses a dark Gruvbox color scheme for the dark theme. The light theme is yet to be implemented. 
+The site uses Gruvbox color scheme.
 
 ### Color Palette
 
@@ -55,7 +55,6 @@ The site uses a dark Gruvbox color scheme for the dark theme. The light theme is
 ## List of features, that are yet to be implemented
 
 - A full graph view of the Volumes. The Pond, from what I can tell, had the module cut out
-- Implement the light theme
 - Change the meta stuff (the pasting link images and title)
 - Implement the eye with tracking
 - Change the 404 page
