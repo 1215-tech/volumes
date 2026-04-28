@@ -58,3 +58,4 @@ The site uses Gruvbox color scheme.
 - Change the meta stuff (the pasting link images and title). Almost done, finish the embed image
 - Implement the eye with tracking
 - Fix the image linking
+- Fix the mobile picture 
