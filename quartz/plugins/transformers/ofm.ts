@@ -445,6 +445,7 @@ export function processWikilink(
             width,
             height,
             alt,
+            "data-original-filepath": fp,
           },
         },
       }

@@ -2,6 +2,7 @@ import type { Element, ElementContent, Root } from "hast"
 
 import { spawnSync, type SpawnSyncReturns } from "child_process"
 import crypto from "crypto"
+import fsSync from "fs"
 import gitRoot from "find-git-root"
 import fs from "fs/promises"
 import sizeOf from "image-size"
@@ -189,7 +190,33 @@ class AssetProcessor {
   }
 
   /**
+   * Recursively searches for a file in a directory tree.
+   * @param dir - The directory to search in
+   * @param filename - The filename to search for
+   * @returns The full path if found, null otherwise
+   */
+  private static searchForFile(dir: string, filename: string): string | null {
+    try {
+      const entries = fsSync.readdirSync(dir, { withFileTypes: true })
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name)
+        if (entry.isFile() && entry.name === filename) {
+          return fullPath
+        }
+        if (entry.isDirectory()) {
+          const found = AssetProcessor.searchForFile(fullPath, filename)
+          if (found) return found
+        }
+      }
+    } catch {
+      // Ignore errors (permission issues, etc.)
+    }
+    return null
+  }
+
+  /**
    * Resolves a local asset path, handling file:// URLs and relative/absolute paths.
+   * Tries unslugified path (spaces instead of dashes) if the slugified path doesn't exist.
    */
   private static async resolveLocalAssetPath(src: string): Promise<string> {
     if (src.startsWith("file://")) {
@@ -214,6 +241,27 @@ class AssetProcessor {
       // Assumes asset is in website_content for relative paths
       localPath = path.join(paths.projectRoot, "website_content", localPath)
     }
+
+    // If the slugified path doesn't exist, try unslugified path (spaces instead of dashes)
+    if (!fsSync.existsSync(localPath)) {
+      const dir = path.dirname(localPath)
+      const baseName = path.basename(localPath)
+      // Try replacing dashes with spaces to handle Obsidian pasted images
+      const unslugifiedName = baseName.replace(/-/g, " ")
+      const unslugifiedPath = path.join(dir, unslugifiedName)
+      if (fsSync.existsSync(unslugifiedPath)) {
+        localPath = unslugifiedPath
+      } else {
+        // Also try the reverse: if filename has spaces, try slugified version in parent dirs
+        // Search in website_content for a file with matching unslugified name
+        const searchDir = path.join(paths.projectRoot, "website_content")
+        const found = AssetProcessor.searchForFile(searchDir, unslugifiedName)
+        if (found) {
+          localPath = found
+        }
+      }
+    }
+
     await fs.access(localPath)
     return localPath
   }
@@ -348,7 +396,15 @@ class AssetProcessor {
         typeof node.properties?.src === "string" &&
         this.imageTagsToProcess.includes(node.tagName)
       ) {
-        imageAssetsToProcess.push({ node, src: node.properties.src })
+        // Store the original src before any processing
+        const originalSrc = node.properties.src as string
+        // Check if we have an original filepath from wikilink processing
+        const originalFilepath = node.properties["data-original-filepath"]
+        if (typeof originalFilepath === "string" && originalFilepath.trim()) {
+          // Store the original filepath for later use in resolveLocalAssetPath
+          node.properties["data-resolve-path"] = originalFilepath
+        }
+        imageAssetsToProcess.push({ node, src: originalSrc })
         return
       }
 
