@@ -7,6 +7,7 @@ hideFolderContent: "true"
 - [[Cheap HE Keyboard build]]
 - [[E-readers]]
 - [[Laptop]]
+- [[ROG Ally Switch]]
 - [[Main PC Midlife refresh 2026]]
 - [[Potential periphery refresh 2026]]
 - [[Server 2026 hardware]]
