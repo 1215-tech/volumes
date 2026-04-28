@@ -6,7 +6,7 @@ publish: "true"
 # Office/My room
 ---
 - Second table for workspace and stuff. My table top on 2 different Alex drawers. Peg boards, an organizer, maybe a magnetic parts tray. 
-	 Vibe reference: ![](Pasted image 20260222222714.png)
+	 Vibe reference: ![[Pasted image 20260222222714.png]]
 		*not going for the angled setup anymore*
 - A loft bed on top of the workspace table at some point. 
 	A good reference for this: [[I Transformed My 156 sq ft Room Into a Dream Studio]]
