@@ -206,6 +206,32 @@ publish: "true"
 # Main courses
 ---
 
+### Mash & Stew
+==Online==
+
+**Ingredients** for the Stew
+- 1kg of beef, preferably chuck
+- 1 table spoon of oil
+- 1/2 cup of onions, finely chopped
+- 1/2 cup of carrots, finely chopped
+- 1/2 cup of daikon, finely chopped
+- 2 table spoons of butter, optional for thickening
+- 1 table spoon of flour, optional for thickening
+- 1 table spoon of potato starch, optional for thickening
+- 1/4 cup of light soy sauce 
+- 2 table spoons of dark soy sauce
+- 3 table spoons of brown sugar
+- 500ml of beef stock
+
+**Ingredients** for the Mash
+- 1kg of taters 
+- 2 tea spoons of salt 
+- 150g of butter
+- 200ml of cream
+- Season with salt to taste
+
+**Recipe** for the Stew
+- 
 ### Tomato and Chicken pasta
 ==Online==
 

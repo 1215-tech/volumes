@@ -32,3 +32,4 @@ publish: "true"
 - [[Thus Spoke Zarathustra]] - Friedrich Nietzsche
 - [[The Ocean of Theosophy]] - William Judge
 - [[Proem to The Secret Doctrine]] - H.P. Blavatsky
+- 

@@ -2,7 +2,8 @@
 title: Workout
 publish: "true"
 ---
-# Counter - 9
+# Main counter - 9
+## Misc counter - 2
 
 ## Program 
 - half repetitions occasionally while I'm anemic or have joint thing
