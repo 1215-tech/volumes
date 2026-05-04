@@ -29,9 +29,12 @@ Now, a couple of things have changed since moving to Serbia. First and foremost,
 ---
 Interestingly enough, found out that the 3900x still [beats](https://technical.city/en/cpu/Ryzen-9-3900X-vs-Apple-M4-8-cores) the regular Mac M4 in "combined" benchmark, whatever "combined" means. It obviously is more efficient, however that is a problem for another day. 
 
-Some good references for what I want to do with the top of the case. The idea is to extend the top to fit two 3.5" HDDs, to not sacrifice the GPU spot. There is a [guy](https://www.etsy.com/uk/listing/1637357196/fractal-terra-top-hat-mod-kit) on Etsy. 
+Some good references for what I want to do with the top of the case. The idea is to extend the top to fit two 3.5" HDDs, to not sacrifice the GPU spot. There is a [guy](https://www.etsy.com/uk/listing/1637357196/fractal-terra-top-hat-mod-kit) on Etsy. The risers for the fans [here](https://www.thingiverse.com/thing:7023578). The top extension 3d model reference [here](https://cults3d.com/en/3d-model/gadget/fractal-terra-cooling-mod-for-2x-nf-a12x15).  
 
 ![[Pasted image 20260504043245.png]]
 ![[Pasted image 20260504043722.png]]
 ![[Pasted image 20260504043815.png]]
 *This should be enough for the HDDs*
+![[Pasted image 20260504045127.png]]
+![[Pasted image 20260504045152.png]]
+*The risers for the fans, 2x 120 by 15 slims*
