@@ -8,7 +8,7 @@ hideFolderContent: "true"
 - [[E-readers]]
 - [[Laptop]]
 - [[ROG Ally Switch]]
-- [[Main PC Midlife refresh 2026]]
+- [[Main PC]]
 - [[Potential periphery refresh 2026]]
 - [[The server]]
 - [[Homelab software]]

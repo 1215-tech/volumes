@@ -15,6 +15,9 @@ At the end of 2023 I have finally decided to upgrade from my r7 2700 + gtx 1070 
 ![[Pasted image 20260504042007.png]]
 *A couple of pics of the server running in Yerevan. R7 2700, 1070 and Terra*
 
+![[Pasted image 20260504175519.png]]
+*Belgrade, just before Foxy came*
+
 Now, a couple of things have changed since moving to Serbia. First and foremost, some of the server hardware has been donated to Foxy, since he couldn't bring his whole computer here. Most of the stuff is back to not being utilized by him, so it can be re-assembled back into being a proper server. Second, it is now sort of feasible to run quality LLMs on a single GPU. Taking into the account all of this, here is the list for the 2026 refresh build of the server:   
 
 - ~~3900x~~ 174 USD from foxy
