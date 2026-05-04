@@ -1,6 +1,8 @@
 ---
 title: Laptop
 publish: "true"
+tags:
+  - EDC
 ---
 I bought the Xiaomi Redmibook Pro 15 2022 Intel with i7 12650h and 2050. For 250 EUR that I got it for it's an insane steal. Granted the RAM is soldered, however with current prices I ain't upgrading this shit. The laptop is in decent enough condition, it was covered in some retarded stickers when I bought it; it also came with ugly russian stickers on the keyboard as seen below: 
 

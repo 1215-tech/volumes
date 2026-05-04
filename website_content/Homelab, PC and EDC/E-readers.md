@@ -1,6 +1,8 @@
 ---
 title: E-readers
 publish: "true"
+tags:
+  - EDC
 ---
 #### Supernote Nomad 
 - Refurb Nomad itself - 336 EUR

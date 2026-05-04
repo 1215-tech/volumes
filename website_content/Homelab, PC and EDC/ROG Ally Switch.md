@@ -1,3 +1,8 @@
+---
+title: ROG Ally Switch
+publish: "true"
+---
+
 I already have a ROG Ally non X Z1 Extreme. Currently running Steam OS, until I make a video on it. I, for the longest time, wanted to have something akin to a "guest PC", not for the *guest* part of it necessarily, but instead to have a home-console like experience. However, currently, I only have R7 2700 lying around and not being used in any projects. Which, unfortunately, would not be enough for modern gaming to my tastes. Hence, ROG Ally. I bought this thing from a good friend in Autumn of 2025 for 350 EUR, which to this day is a steal. I also have a 2080ti lying around, which may or may not be a good idea. The lists below show what I need for the build and sources.
 
 ![[Pasted image 20260504175846.png]]

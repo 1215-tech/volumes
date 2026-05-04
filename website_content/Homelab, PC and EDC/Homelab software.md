@@ -1,6 +1,8 @@
 ---
 title: Homelab software
 publish: "true"
+tags:
+  - Homelab
 ---
 
 # Discord replacement

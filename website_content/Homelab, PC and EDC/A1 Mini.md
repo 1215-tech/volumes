@@ -1,6 +1,8 @@
 ---
 title: A1 Mini
 publish: "true"
+tags:
+  - Homelab
 ---
 ### List:
 ---

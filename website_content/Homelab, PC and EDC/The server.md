@@ -1,6 +1,8 @@
 ---
 title: The server
 publish: "true"
+tags:
+  - Homelab
 ---
 The server, in a sense, is the heart of the household. It can do everything from hosting game servers to serving as ones personal library. If you set it up in a certain way, it can even serve as a second brain of sorts. All of that said, it's quite ironic that my server has always been made out of old and quite retarded hardware. 
 

@@ -1,6 +1,8 @@
 ---
 title: Cheap HE Keyboard Build
 publish: "true"
+tags:
+  - Keyboards
 ---
 ### List:
 ---
