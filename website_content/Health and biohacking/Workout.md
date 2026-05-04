@@ -3,13 +3,13 @@ title: Workout
 publish: "true"
 ---
 # Main counter - 9
-## Misc counter - 2
+## Misc counter - 3
 
 ## Program 
 - half repetitions occasionally while I'm anemic or have joint thing
 - upped the repetitions on the arms day
 ## Experiments
-- Whenever feel anxious - one repetition of the current day set
+- Whenever feel anxious - one repetition of the current day set (that's a misc counter)
 ## Notes
 - Work on the general form, but especially the swings
 - Add something for core

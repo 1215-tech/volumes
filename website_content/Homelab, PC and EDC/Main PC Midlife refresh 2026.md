@@ -8,4 +8,4 @@ publish: "true"
 - Double fans for AIO: 2xNf-a12x25 G2, 65 EUR Each on Kupujem. 
 - Side panels: [Here](https://jakefacecustoms.myshopify.com/cart).  105 EUR
 - Custom cables: From Cablemod. https://custom.cablemod.com/3a680e6160a3
-	- Maybe a new PSU since I need another one for the [[Server 2026 hardware]] anyway
+	- Maybe a new PSU since I need another one for the [[The server]] anyway
