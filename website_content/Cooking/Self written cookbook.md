@@ -222,6 +222,10 @@ publish: "true"
 - 2 table spoons of dark soy sauce
 - 3 table spoons of brown sugar
 - 500ml of beef stock
+- 1kg potatoes
+- 2 tea spoon salt
+- 150g butter
+- 200ml cream
 
 **Ingredients** for the Mash
 - 1kg of taters 
@@ -231,7 +235,51 @@ publish: "true"
 - Season with salt to taste
 
 **Recipe** for the Stew
-- 
+- Cut the beef into large chunks. Dice the onion, carrot, and daikon into a mirepoix
+- Pat the beef dry with paper towels so it sears properly
+- Heat a pan and sear the beef on all sides until browned. Remove and set aside
+- In the same pot, lightly sauté the onion, carrot, and daikon until fragrant
+- Add the seared beef back into the pot. Pour in the soy sauce and brown sugar
+- Deglaze with beef stock, scraping up the browned bits from the bottom of the pot
+- Place a piece of parchment paper with a small hole in the center over the braise to keep moisture in
+- Cover with a lid and transfer to the oven
+- Cook at 150°C for 3 hours, until the beef is tender
+
+**Thicken the stew**
+- In a small bowl, combine softened butter, all-purpose flour, and potato starch to form a smooth paste
+- Ladle a small amount of the hot braising liquid from the pot into the mixture and whisk until fully blended — this tempers it and prevents lumps
+- Pour the tempered mixture back into the stew while stirring gently
+- Simmer for a few minutes until the sauce thickens to a glossy, velvety consistency
+
+**Recipe** for mash
+- Place the potatoes (skin on) into a pot of cold, well-salted water
+- Bring the pot up to a gentle boil and cook until the potatoes are tender and can be easily pierced with a knife (about 15–20 minutes, depending on size)
+- Drain the potatoes well, then pass them through a sieve or potato ricer for extra fluffiness
+- While the potatoes are still warm, add the butter and cream and fold them into the mash until smooth and fully incorporated
+- Season with salt to taste and serve
+
+### Hot Honey Salmon Pasta 
+==Online==
+
+**Ingredients**
+- 240g of feta
+- 2 cuts of salmon
+- Cherry tomatoes
+- Chick peas
+- Olive oil
+- Salt & pepper
+- Honey
+- Tomato paste
+- Chili-flakes
+- Basil
+- Pasta
+
+**Recipe**
+- Lay the feta, 2 cuts of salmon, tomatoes and chick peas in the baking thing, drizzle with oil, salt and pepper to taste. Put aside
+- Mix honey, tomato paste and chili-flakes in the bowl. Cover the ingredients in the mixture. Put in the oven for 35 minutes at 200C
+- Boil the pasta
+- Mix everything and season the basil
+
 ### Tomato and Chicken pasta
 ==Online==
 
