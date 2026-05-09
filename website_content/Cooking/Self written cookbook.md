@@ -206,6 +206,19 @@ publish: "true"
 # Main courses
 ---
 
+### Greek Bandit Meat
+==Online==
+
+**Ingredients**
+- Boneless lamb leg, shank or shoulder
+- Potatoes
+- Tomatoes
+- Red bell peppers
+- Onions
+- Seasoning and Marinade: garlic, dried oregano, dried thyme, dried parsley, Dijon mustard, olive oil, white vine, lemon juice and broth (vegetable or beef)
+
+**Recipe**
+- 
 ### Mash & Stew
 ==Online==
 

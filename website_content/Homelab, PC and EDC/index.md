@@ -13,6 +13,6 @@ hideFolderContent: "true"
 - [[The server]]
 - [[Homelab software]]
 - [[Keyboards general]] 
-
+- [[Watches]]
 ---
 Re-use & recycle has become the main moto for this section over the years. I try to find niche stuff that *just works*™ for me. To an extent, I do find that usually a device that "does everything"; does nothing or fails to do anything adequately. Hence a lot of approaches that can be called unique in this section. 
