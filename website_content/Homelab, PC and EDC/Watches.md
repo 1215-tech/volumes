@@ -48,3 +48,11 @@ Seagull is a Chinese watch brand. In fact the first one to appear in communist C
 
 Seagulls are top-notch, quality watches. The movement is basically a copy of a Swiss one and the design is goated. It also comes with a bit of history, which I can certainly appreciate. The communist tinge, does bother me a bit, however I can live with it due to several reasons. First of which is, obviously, quality. Then there is also the fact that China is not communist anymore; and last, but certainly, not least is the fact that China will probably be instrumental in the coming division of the russian state.
 
+## Timex 
+
+### Weekender
+
+I am a basic bitch like that. Pretty much the face of the modern field watch genre. It is, admittedly a more casual style of a field watch, but it works. Weekender uses a simple quartz movement, and there is really nothing to say about the thing. It's just a good, neutral watch. Here are some models I find interesting.
+
+![[Pasted image 20260510171510.png]]*White dial and a navy-white strap*
+
