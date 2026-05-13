@@ -58,3 +58,5 @@ The site uses Gruvbox color scheme.
 - Change the meta stuff (the pasting link images and title). Almost done, finish the embed image
 - Implement the eye with tracking
 - Fix the mobile picture 
+- Fix the Cyrillic drop-cap
+- Add visual book meta
